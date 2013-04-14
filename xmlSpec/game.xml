@@ -1,0 +1,138 @@
+<?xml version = "1.0"?>
+<GameData>
+
+<view>
+  <viewWidth>640</viewWidth>
+  <viewHeight>480</viewHeight>
+</view>
+
+<world>
+  <worldWidth>2560</worldWidth>
+  <worldHeight>480</worldHeight>
+</world>
+<tickInterval>17</tickInterval>
+
+<screenTitle>Super Something Bros.</screenTitle>
+<caption>Seeing possible future characters</caption>
+<messageY>10</messageY>
+
+<helpText>Press t to track a different object, F2 to track the player</helpText>
+<helpY>50</helpY>
+
+<font name="font">
+  <fontFile>font/dyslexic-bold.otf</fontFile>
+  <fontSize>14</fontSize>
+  <fontRed>0</fontRed>
+  <fontGreen>0</fontGreen>
+  <fontBlue>255</fontBlue>
+  <fontUnused>0</fontUnused>
+</font>
+<maxStringSize>50</maxStringSize>
+
+<back>
+  <backFile>images/sunset.jpg</backFile>
+  <backSrcX>0</backSrcX>
+  <backSrcY>0</backSrcY>
+  <backWidth>640</backWidth>
+  <backHeight>480</backHeight>
+  <backLoc backX="0" backY="0"/>
+  <backSpeed backSpeedX="0" backSpeedY="0"/>
+  <backTransparency>false</backTransparency>
+  <backScale>0.0</backScale>
+</back>
+
+<mid>
+  <midFile>images/mountainsback.png</midFile>
+  <midSrcX>0</midSrcX>
+  <midSrcY>0</midSrcY>
+  <midWidth>640</midWidth>
+  <midHeight>480</midHeight>
+  <midLoc midX="0" midY="0"/>
+  <midSpeed midSpeedX="0" midSpeedY="0"/>
+  <midTransparency>false</midTransparency>
+  <midScale>0.3</midScale>
+</mid>
+
+<midfront>
+  <midfrontFile>images/mountains.png</midfrontFile>
+  <midfrontSrcX>0</midfrontSrcX>
+  <midfrontSrcY>0</midfrontSrcY>
+  <midfrontWidth>640</midfrontWidth>
+  <midfrontHeight>480</midfrontHeight>
+  <midfrontLoc midfrontX="0" midfrontY="0"/>
+  <midfrontSpeed midfrontSpeedX="0" midfrontSpeedY="0"/>
+  <midfrontTransparency>false</midfrontTransparency>
+  <midfrontScale>0.5</midfrontScale>
+</midfront>
+
+<boardwalk>
+  <boardwalkFile>images/boardwalk.png</boardwalkFile>
+  <boardwalkSrcX>0</boardwalkSrcX>
+  <boardwalkSrcY>0</boardwalkSrcY>
+  <boardwalkWidth>640</boardwalkWidth>
+  <boardwalkHeight>480</boardwalkHeight>
+  <boardwalkLoc boardwalkX="0" boardwalkY="0"/>
+  <boardwalkSpeed boardwalkSpeedX="0" boardwalkSpeedY="0"/>
+  <boardwalkTransparency>false</boardwalkTransparency>
+  <boardwalkScale>0.95</boardwalkScale>
+</boardwalk>
+
+
+
+<shell>
+  <shellFile>images/shell.png</shellFile>
+  <shellSrcX>0</shellSrcX>
+  <shellSrcY>0</shellSrcY>
+  <shellWidth>51</shellWidth>
+  <shellHeight>51</shellHeight>
+  <shellScaleMin>0.1</shellScaleMin>
+  <shellScaleMax>1.2</shellScaleMax>
+  <shellLoc shellX="320" shellY="240"/>
+  <shellSpeed shellSpeedX="250" shellSpeedY="250"/>
+  <shellTransparency>true</shellTransparency>
+  <shellCount>10</shellCount>
+</shell>
+
+<pokeball>
+  <pokeballFile>images/pokeball.png</pokeballFile>
+  <pokeballSrcX>0</pokeballSrcX>
+  <pokeballSrcY>0</pokeballSrcY>
+  <pokeballFrames>8</pokeballFrames>
+  <pokeballFrameInterval>12</pokeballFrameInterval>
+  <pokeballWidth>29</pokeballWidth>
+  <pokeballHeight>28</pokeballHeight>
+  <pokeballScaleMin>0.9</pokeballScaleMin>
+  <pokeballScaleMax>0.9</pokeballScaleMax>
+  <pokeballLoc pokeballX="320" pokeballY="240"/>
+  <pokeballSpeed pokeballSpeedX="250" pokeballSpeedY="250"/>
+  <pokeballTransparency>true</pokeballTransparency>
+</pokeball>
+
+<mario>
+  <marioLoc marioX="220" marioY="440"/>
+  <marioSpeedX>300</marioSpeedX>
+  <marioSpeedY>200</marioSpeedY>
+  <marioFrameInterval>12</marioFrameInterval>
+  <marioFile>images/mario_run.png</marioFile>
+  <marioFrames>12</marioFrames>
+  <marioSrcX>0</marioSrcX>
+  <marioSrcY>5</marioSrcY>
+  <marioWidth>30</marioWidth>
+  <marioHeight>40</marioHeight>
+  <marioScaleMin>1.0</marioScaleMin>
+  <marioScaleMax>1.0</marioScaleMax>
+  <marioTransparency>true</marioTransparency>
+  <marioLeftFile>images/mario_run.png</marioLeftFile>
+  <marioLeftFrames>12</marioLeftFrames>
+  <marioLeftSrcX>0</marioLeftSrcX>
+  <marioLeftSrcY>49</marioLeftSrcY>
+  <marioLeftWidth>30</marioLeftWidth>
+  <marioLeftHeight>40</marioLeftHeight>
+  <marioLeftScaleMin>1.0</marioLeftScaleMin>
+  <marioLeftScaleMax>1.0</marioLeftScaleMax>
+  <marioLeftTransparency>true</marioLeftTransparency>
+  <marioMinY>380</marioMinY>
+  <marioJumpTicks>2000</marioJumpTicks>
+</mario>
+
+</GameData>
