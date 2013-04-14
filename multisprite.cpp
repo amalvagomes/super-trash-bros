@@ -10,7 +10,21 @@ void MultiframeSprite::advanceFrame(Uint32 ticks) {
   dt -= df * ms;
   currentFrame = (currentFrame + df) % numberOfFrames;
 }
+/*
+protected:
+  unsigned currentFrame;
+  unsigned numberOfFrames;
+  int frameHeight;
+  int frameWidth;
+  int worldWidth;
+  int worldHeight;
 
+private:
+  const std::vector<Frame *> frames;
+  float dt;
+  unsigned frameInterval;
+  void advanceFrame(Uint32 ticks);
+*/
 MultiframeSprite::MultiframeSprite( const std::string& name, 
                   const std::vector<Frame*> & fms, const float sc) :
   Drawable(name, 
@@ -20,27 +34,27 @@ MultiframeSprite::MultiframeSprite( const std::string& name,
                     Gamedata::getInstance()->getXmlInt(name+"SpeedY")),
            sc
            ),
-  frames(fms),
-  frameWidth(fms[0]->getWidth()),
-  frameHeight(fms[0]->getHeight()),
-  worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
-  worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight")),
-  dt(0),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance()->getXmlInt(name+"Frames") ),
+  frameHeight(fms[0]->getHeight()),
+  frameWidth(fms[0]->getWidth()),
+  worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
+  worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight")),
+  frames(fms),
+  dt(0),
   frameInterval( Gamedata::getInstance()->getXmlInt(name+"FrameInterval") )
 { }
 
 MultiframeSprite::MultiframeSprite(const MultiframeSprite& s) :
   Drawable(s.getName(), s.getPosition(), s.getVelocity(), s.getScale()),
-  frames(s.frames),
-  frameWidth(s.getFrame()->getWidth()),
-  frameHeight(s.getFrame()->getHeight()),
-  worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
-  worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight")),
-  dt(s.dt),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
+  frameHeight(s.getFrame()->getHeight()),
+  frameWidth(s.getFrame()->getWidth()),
+  worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
+  worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight")),
+  frames(s.frames),
+  dt(s.dt),
   frameInterval( s.frameInterval )
   { }
 

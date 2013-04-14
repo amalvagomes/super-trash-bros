@@ -17,15 +17,17 @@ public:
   virtual void draw() const;
   virtual void update(Uint32 ticks);
 
-private:
-  const std::vector<Frame *> frames;
-  int frameWidth;
-  int frameHeight;
-  int worldWidth;
-  int worldHeight;
-  float dt;
+protected:
   unsigned currentFrame;
   unsigned numberOfFrames;
+  int frameHeight;
+  int frameWidth;
+  int worldWidth;
+  int worldHeight;
+
+private:
+  const std::vector<Frame *> frames;
+  float dt;
   unsigned frameInterval;
   void advanceFrame(Uint32 ticks);
 };
