@@ -66,7 +66,6 @@ Manager::Manager() :
   player(std::string("mario")),
   player2(std::string("yoshi")),
   currentStar(0),
-//  deathFrames(),
   displayHelpText(false),
   stars(),
   TICK_INTERVAL( gdata->getXmlInt("tickInterval") ),
@@ -80,7 +79,6 @@ Manager::Manager() :
   // a lot of copies, reallocations, and deletions:
   FrameFactory& frameFact = FrameFactory::getInstance();
   stars.reserve(gdata->getXmlInt("shellCount")+2);
-//  makeDyingCrow();
   makeShells();
   float scale;
   std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
@@ -88,20 +86,6 @@ Manager::Manager() :
   sort(stars.begin(), stars.end(), DrawableComparator());
   viewport.setObjectToTrack(player.getSprite());
 }
-
-/*void Manager::makeDyingcrow() {
-  unsigned numberOfFrames = gdata->getXmlInt("dyingcrowFrames");
-  Uint16 pwidth = gdata->getXmlInt("dyingcrowWidth");
-  Uint16 pheight = gdata->getXmlInt("dyingcrowHeight");
-  Uint16 srcX = gdata->getXmlInt("dyingcrowSrcX");
-  Uint16 srcY = gdata->getXmlInt("dyingcrowSrcY");
-
-  for (unsigned i = 0; i < numberOfFrames; ++i) {
-    unsigned frameX = i * pwidth + srcX;
-    deathFrames.push_back( 
-      new Frame(dyingcrowSurface, pwidth, pheight, frameX, srcY) );
-  }
-}*/
 
 void Manager::makeShells() {
   FrameFactory& frameFact = FrameFactory::getInstance();
@@ -275,14 +259,3 @@ Uint32 Manager::timeLeft() {
   Uint32 now = SDL_GetTicks();
   return (nextTime <= now)?0:(nextTime - now);
 }
-
-/*void Manager::killPlayer() {
-    const Drawable* sprite = (player.getSprite());
-      MultiframeSprite* death = 
-	new PlayerDeath("dyingcrow", deathFrames);
-      player = death;
-      death->setPosition( player->getPosition() );
-      return;
-    }
-  }
-}*/

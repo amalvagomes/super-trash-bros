@@ -12,7 +12,6 @@
 #include "world.h"
 #include "viewport.h"
 #include "player.h"
-//#include "playerDeath.h"
 
 class Manager {
 public:
@@ -46,7 +45,6 @@ private:
   Player player2;
 
   int currentStar;
-//  std::vector<Frame*> deathFrames;
   bool displayHelpText;
 
   std::vector<Drawable*> stars;
@@ -59,7 +57,6 @@ private:
   Manager& operator=(const Manager&);
 
   void makeShells();
-//  void killPlayer();
 
   class DrawableComparator{
     public:

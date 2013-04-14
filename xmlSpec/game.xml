@@ -162,18 +162,4 @@
   <yoshiJumpTicks>2000</yoshiJumpTicks>
 </yoshi>
 
-<dyingcrow>
-  <dyingcrowFile>images/dyingcrow.png</dyingcrowFile>
-  <dyingcrowLoc dyingcrowX="120" dyingcrowY="200"/>
-  <dyingcrowFrames>6</dyingcrowFrames>
-  <dyingcrowFrameInterval>500</dyingcrowFrameInterval>
-  <dyingcrowSrcX>0</dyingcrowSrcX>
-  <dyingcrowSrcY>0</dyingcrowSrcY>
-  <dyingcrowWidth>58</dyingcrowWidth>
-  <dyingcrowHeight>54</dyingcrowHeight>
-  <dyingCrowSpeed dyingCrowSpeedX="4" dyingcrowSpeedY="100"/>
-  <dyingcrowTransparency>true</dyingcrowTransparency>
-</dyingcrow>
-
-
 </GameData>
