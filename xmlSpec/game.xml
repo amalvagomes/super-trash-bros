@@ -132,7 +132,7 @@
   <marioLeftScaleMax>1.0</marioLeftScaleMax>
   <marioLeftTransparency>true</marioLeftTransparency>
   <marioMinY>380</marioMinY>
-  <marioJumpTicks>2000</marioJumpTicks>
+  <marioJumpVelocity>300</marioJumpVelocity>
 </mario>
 
 <yoshi>
@@ -159,7 +159,7 @@
   <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>
   <yoshiLeftTransparency>true</yoshiLeftTransparency>
   <yoshiMinY>380</yoshiMinY>
-  <yoshiJumpTicks>2000</yoshiJumpTicks>
+  <yoshiJumpVelocity>200</yoshiJumpVelocity>
 </yoshi>
 
 </GameData>

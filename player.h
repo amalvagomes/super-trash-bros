@@ -20,10 +20,10 @@ public:
 private:
   const Gamedata* gdata;
   bool keyPressed;
+  bool jumping;
+  float jumpPeak;
   int worldWidth;
   int worldHeight;
-  int jumpCounter;
-  int jumpTicks;
   Vector2f initialVelocity;
   float width;
   float height;
