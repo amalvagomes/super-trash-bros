@@ -129,6 +129,12 @@ void Manager::draw() const {
       player2.draw();
       player2Drawn = true;
     }
+    if(playerDrawn) {
+      player.collideWith(stars[i]);
+    }
+    if(player2Drawn) {
+      player2.collideWith(stars[i]);
+    }
     stars[i]->draw();
   }
   if(!backWorldDrawn) {
@@ -146,6 +152,8 @@ void Manager::draw() const {
   if(displayHelpText) {
     viewport.draw();
   }
+  io.printDamage(player.getDamage(),70,400);
+  io.printDamage(player2.getDamage(),520,400);
 }
 
 void Manager::play() {

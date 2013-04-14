@@ -3,6 +3,16 @@
 #include "multisprite.h"
 #include "gamedata.h"
 
+unsigned MultiframeSprite::getPixel(Uint32 i, Uint32 j) const { 
+  Uint32 x = static_cast<Uint32>(X());
+  Uint32 y = static_cast<Uint32>(Y());
+  x = i - x;
+  y = j - y;
+  Uint32 *pixels = static_cast<Uint32 *>(frames[currentFrame]->getSurface()->pixels);
+  return pixels[ ( y * frames[currentFrame]->getWidth() ) + x ];
+}
+
+
 void MultiframeSprite::advanceFrame(Uint32 ticks) {
   float ms = 1000.0/frameInterval;
   dt += ticks;

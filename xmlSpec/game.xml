@@ -109,7 +109,7 @@
 </pokeball>
 
 <mario>
-  <marioLoc marioX="220" marioY="440"/>
+  <marioLoc marioX="220" marioY="400"/>
   <marioSpeedX>300</marioSpeedX>
   <marioSpeedY>200</marioSpeedY>
   <marioFrameInterval>12</marioFrameInterval>
@@ -118,7 +118,7 @@
   <marioSrcX>0</marioSrcX>
   <marioSrcY>10</marioSrcY>
   <marioWidth>60</marioWidth>
-  <marioHeight>70</marioHeight>
+  <marioHeight>80</marioHeight>
   <marioScaleMin>1.0</marioScaleMin>
   <marioScaleMax>1.0</marioScaleMax>
   <marioTransparency>true</marioTransparency>
@@ -127,7 +127,7 @@
   <marioLeftSrcX>0</marioLeftSrcX>
   <marioLeftSrcY>98</marioLeftSrcY>
   <marioLeftWidth>60</marioLeftWidth>
-  <marioLeftHeight>70</marioLeftHeight>
+  <marioLeftHeight>80</marioLeftHeight>
   <marioLeftScaleMin>1.0</marioLeftScaleMin>
   <marioLeftScaleMax>1.0</marioLeftScaleMax>
   <marioLeftTransparency>true</marioLeftTransparency>
@@ -136,7 +136,7 @@
 </mario>
 
 <yoshi>
-  <yoshiLoc yoshiX="220" yoshiY="440"/>
+  <yoshiLoc yoshiX="120" yoshiY="400"/>
   <yoshiSpeedX>300</yoshiSpeedX>
   <yoshiSpeedY>200</yoshiSpeedY>
   <yoshiFrameInterval>12</yoshiFrameInterval>

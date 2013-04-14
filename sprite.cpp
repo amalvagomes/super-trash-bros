@@ -67,7 +67,6 @@ int Sprite::getDistance(const Sprite *obj) const {
 void Sprite::update(Uint32 ticks) { 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
-
   if ( Y() < 0) {
     velocityY( abs( velocityY() ) );
   }
@@ -81,4 +80,5 @@ void Sprite::update(Uint32 ticks) {
   if ( X() > worldWidth-frameWidth) {
     velocityX( -abs( velocityX() ) );
   }  
+  
 }

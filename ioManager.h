@@ -17,6 +17,7 @@ public:
   }
   SDL_Surface* loadAndSet(const string filename, bool setcolorkey) const;
 
+  void printDamage(const double& msg, Uint32 x, Uint32 y) const;
   void printMessageAt(const string& msg, Uint32 x, Uint32 y) const;
   void printMessageCenteredAt(const string& msg, Uint32 y) const;
   void printStringAfterMessage(const string&, Uint32 x, Uint32 y) const;
@@ -38,6 +39,7 @@ private:
   const unsigned MAX_STRING_SIZE;
   SDL_Surface * screen;
   TTF_Font *font;
+  TTF_Font *damageFont;
   SDL_Color color;
   string title;
   string inputString;

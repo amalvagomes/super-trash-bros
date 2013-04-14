@@ -30,6 +30,7 @@ public:
     return scale < rhs.scale;
   }
 
+  virtual unsigned getPixel(Uint32, Uint32) const = 0;
   const std::string& getName() const { return name; }
   void setName(const std::string& n) { name = n; }
   virtual const Frame* getFrame() const = 0;

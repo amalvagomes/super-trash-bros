@@ -17,6 +17,7 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+  unsigned getPixel(Uint32, Uint32) const;
 
 private:
   std::vector<Frame *> framesLeft;

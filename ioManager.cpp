@@ -16,6 +16,7 @@ IOManager::IOManager( ) :
     // The 3rd and 4th parameters are just as important as the first 2!
     screen(SDL_SetVideoMode(viewWidth, viewHeight, 32, SDL_DOUBLEBUF)),
     font( NULL ), 
+    damageFont( NULL ), 
     color(),
     title( gdata->getXmlStr("screenTitle") ),
     inputString("")  
@@ -29,6 +30,10 @@ IOManager::IOManager( ) :
   font = TTF_OpenFont(
          Gamedata::getInstance()->getXmlStr("fontFile").c_str(), 
          Gamedata::getInstance()->getXmlInt("fontSize")
+         );
+  damageFont = TTF_OpenFont(
+         Gamedata::getInstance()->getXmlStr("fontFile").c_str(), 
+         36
          );
   if ( !font ) {
     throw string("TTF_OpenFont failed: ") + TTF_GetError();
@@ -72,6 +77,21 @@ void IOManager::printMessageAt(const string& msg, Uint32 x, Uint32 y) const {
    else {
      throw 
      string("Couldn't allocate text sureface in printMessageAt");
+   }
+}
+
+void IOManager::printDamage(const double& msg, Uint32 x, Uint32 y) const {
+   std::ostringstream s;
+   s << msg << "%";
+   SDL_Rect dest = {x,y,0,0};
+   SDL_Surface * stext = TTF_RenderText_Blended(damageFont, s.str().c_str(), color);
+   if (stext) {
+     SDL_BlitSurface( stext, NULL, screen, &dest );
+     SDL_FreeSurface(stext);
+   }
+   else {
+     throw 
+     string("Couldn't allocate text sureface in printDamage");
    }
 }
 
