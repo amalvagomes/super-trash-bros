@@ -4,7 +4,7 @@
 
 class Player {
 public:
-  Player();
+  Player(const string&);
   virtual ~Player();
 
   virtual void update(Uint32 ticks);
@@ -30,6 +30,7 @@ private:
   std::vector<Frame*> frames;
   std::vector<Frame*> framesLeft;
   TwowayMultiframeSprite* sprite;
+  std::string name;
   void makeSprite();
   Player(const Player&);
   Player& operator=(const Player&);

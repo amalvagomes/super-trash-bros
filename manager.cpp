@@ -63,7 +63,8 @@ Manager::Manager() :
   ),
   foreWorld( foreFrame, gdata->getXmlFloat("boardwalkScale")),
   viewport( Viewport::getInstance() ),
-  player(),
+  player(std::string("mario")),
+  player2(std::string("yoshi")),
   currentStar(0),
   displayHelpText(false),
   stars(),
@@ -101,6 +102,7 @@ void Manager::draw() const {
   bool midfrontWorldDrawn = false;
   bool foreWorldDrawn = false;
   bool playerDrawn = false;
+  bool player2Drawn = false;
 
   for (unsigned i = 0; i < stars.size(); ++i) {
     if(!backWorldDrawn && stars[i]->getScale() > backWorld.getScale()) {
@@ -122,6 +124,10 @@ void Manager::draw() const {
     if(!playerDrawn && stars[i]->getScale() > player.getSprite()->getScale()) {
       player.draw();
       playerDrawn = true;
+    }
+    if(!player2Drawn && stars[i]->getScale() > player2.getSprite()->getScale()) {
+      player2.draw();
+      player2Drawn = true;
     }
     stars[i]->draw();
   }
@@ -192,6 +198,13 @@ void Manager::play() {
           }
           break;
         }
+        case SDLK_F3     : {
+          if (!keyCatch) {
+            keyCatch = true;
+            viewport.setObjectToTrack(player2.getSprite());
+          }
+          break;
+        }
         default          : break;
       }
       if(keystate[SDLK_LEFT]) {
@@ -206,6 +219,18 @@ void Manager::play() {
       if(keystate[SDLK_RIGHT]) {
         player.right();
       }
+      if(keystate[SDLK_a]) {
+        player2.left();
+      }
+      if(keystate[SDLK_s]) {
+        player2.down();
+      }
+      if(keystate[SDLK_w]) {
+        player2.up();
+      }
+      if(keystate[SDLK_d]) {
+        player2.right();
+      }
     }
 
     Uint32 ticks = clock.getElapsedTicks();
@@ -217,6 +242,7 @@ void Manager::play() {
     midfrontWorld.update();
     foreWorld.update();
     player.update(ticks);
+    player2.update(ticks);
     viewport.update();
   }
   delete event;

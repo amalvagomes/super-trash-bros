@@ -42,6 +42,7 @@ private:
   Viewport& viewport;
 
   Player player;
+  Player player2;
 
   int currentStar;
   bool displayHelpText;

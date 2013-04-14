@@ -9,21 +9,22 @@ Player::~Player() {
   delete sprite;
 }
 
-Player::Player() :
+Player::Player(const string& n) :
   gdata( Gamedata::getInstance() ),
   keyPressed(false),
   worldWidth( gdata->getXmlInt("worldWidth") ), 
   worldHeight( gdata->getXmlInt("worldHeight") ), 
   jumpCounter( 0 ),
-  jumpTicks( gdata->getXmlInt("marioJumpTicks") ), 
-  initialVelocity( Vector2f(gdata->getXmlInt("marioSpeedX"), 
-                               gdata->getXmlInt("marioSpeedY") )
+  jumpTicks( gdata->getXmlInt(n+"JumpTicks") ), 
+  initialVelocity( Vector2f(gdata->getXmlInt(n+"SpeedX"), 
+                               gdata->getXmlInt(n+"SpeedY") )
   ), 
-  width( gdata->getXmlInt("marioWidth") ), 
-  height( gdata->getXmlInt("marioHeight") ),
+  width( gdata->getXmlInt(n+"Width") ), 
+  height( gdata->getXmlInt(n+"Height") ),
   frames(),
   framesLeft(),
-  sprite( NULL )
+  sprite( NULL ),
+  name(n)
 { 
   makeSprite();
 }
@@ -31,9 +32,9 @@ Player::Player() :
 void Player::makeSprite() {
   FrameFactory& frameFact = FrameFactory::getInstance();
   float scale;
-  std::vector<Frame*> right = frameFact.getFrameVector("mario", &scale);
-  std::vector<Frame*> left = frameFact.getFrameVector("marioLeft", &scale);
-  sprite = new TwowayMultiframeSprite("mario", left, right, scale);
+  std::vector<Frame*> right = frameFact.getFrameVector(name, &scale);
+  std::vector<Frame*> left = frameFact.getFrameVector(name+"Left", &scale);
+  sprite = new TwowayMultiframeSprite(name, left, right, scale);
 }
 
 void Player::update(Uint32 ticks) { 
@@ -61,7 +62,7 @@ void Player::left()  {
 } 
 void Player::up()    { 
   keyPressed = true;
-  if ( sprite->Y() < Gamedata::getInstance()->getXmlInt("marioMinY") ) {
+  if ( sprite->Y()+sprite->getFrame()->getHeight()-20 < Gamedata::getInstance()->getXmlInt(name+"MinY") ) {
     sprite->velocityY( initialVelocity[1] );
   }
   else {

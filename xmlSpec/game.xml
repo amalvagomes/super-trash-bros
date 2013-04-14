@@ -116,18 +116,18 @@
   <marioFile>images/mario_run.png</marioFile>
   <marioFrames>12</marioFrames>
   <marioSrcX>0</marioSrcX>
-  <marioSrcY>5</marioSrcY>
-  <marioWidth>30</marioWidth>
-  <marioHeight>40</marioHeight>
+  <marioSrcY>10</marioSrcY>
+  <marioWidth>60</marioWidth>
+  <marioHeight>70</marioHeight>
   <marioScaleMin>1.0</marioScaleMin>
   <marioScaleMax>1.0</marioScaleMax>
   <marioTransparency>true</marioTransparency>
   <marioLeftFile>images/mario_run.png</marioLeftFile>
   <marioLeftFrames>12</marioLeftFrames>
   <marioLeftSrcX>0</marioLeftSrcX>
-  <marioLeftSrcY>49</marioLeftSrcY>
-  <marioLeftWidth>30</marioLeftWidth>
-  <marioLeftHeight>40</marioLeftHeight>
+  <marioLeftSrcY>98</marioLeftSrcY>
+  <marioLeftWidth>60</marioLeftWidth>
+  <marioLeftHeight>70</marioLeftHeight>
   <marioLeftScaleMin>1.0</marioLeftScaleMin>
   <marioLeftScaleMax>1.0</marioLeftScaleMax>
   <marioLeftTransparency>true</marioLeftTransparency>
@@ -135,4 +135,30 @@
   <marioJumpTicks>2000</marioJumpTicks>
 </mario>
 
+<yoshi>
+  <yoshiLoc yoshiX="220" yoshiY="440"/>
+  <yoshiSpeedX>300</yoshiSpeedX>
+  <yoshiSpeedY>200</yoshiSpeedY>
+  <yoshiFrameInterval>12</yoshiFrameInterval>
+  <yoshiFile>images/yoshi_run.png</yoshiFile>
+  <yoshiFrames>9</yoshiFrames>
+  <yoshiSrcX>0</yoshiSrcX>
+  <yoshiSrcY>89</yoshiSrcY>
+  <yoshiWidth>99</yoshiWidth>
+  <yoshiHeight>88</yoshiHeight>
+  <yoshiScaleMin>1.0</yoshiScaleMin>
+  <yoshiScaleMax>1.0</yoshiScaleMax>
+  <yoshiTransparency>true</yoshiTransparency>
+  <yoshiLeftFile>images/yoshi_run.png</yoshiLeftFile>
+  <yoshiLeftFrames>9</yoshiLeftFrames>
+  <yoshiLeftSrcX>0</yoshiLeftSrcX>
+  <yoshiLeftSrcY>0</yoshiLeftSrcY>
+  <yoshiLeftWidth>99</yoshiLeftWidth>
+  <yoshiLeftHeight>88</yoshiLeftHeight>
+  <yoshiLeftScaleMin>1.0</yoshiLeftScaleMin>
+  <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>
+  <yoshiLeftTransparency>true</yoshiLeftTransparency>
+  <yoshiMinY>380</yoshiMinY>
+  <yoshiJumpTicks>2000</yoshiJumpTicks>
+</yoshi>
 </GameData>
