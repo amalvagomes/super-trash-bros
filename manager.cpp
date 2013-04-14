@@ -184,6 +184,13 @@ void Manager::play() {
           }
           break;
         }
+	case SDLK_k      : {
+          if (!keyCatch) {
+            keyCatch = true;
+            killPlayer();
+          }
+          break;
+        }
         case SDLK_F1     : {
           if (!keyCatch) {
             keyCatch = true;
@@ -251,4 +258,15 @@ void Manager::play() {
 Uint32 Manager::timeLeft() {
   Uint32 now = SDL_GetTicks();
   return (nextTime <= now)?0:(nextTime - now);
+}
+
+void Manager::killPlayer() {
+    Drawable* sprite = (player.getSprite());
+      MultiframeSprite* death = 
+         new PlayerDeath("dyingcrow", (unsigned)gdata->getXmlInt("dyingcrowFrames"));
+      player = death;
+      death->setPosition( player->getPosition() );
+      return;
+    }
+  }
 }

@@ -57,6 +57,7 @@ private:
   Manager& operator=(const Manager&);
 
   void makeShells();
+  void killPlayer();
 
   class DrawableComparator{
     public:
