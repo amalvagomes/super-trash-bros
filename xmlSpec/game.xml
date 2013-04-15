@@ -93,6 +93,8 @@
   <shellCount>10</shellCount>
 </shell>
 
+<itemCount>1</itemCount>
+<itemInterval>10</itemInterval>
 <pokeball>
   <pokeballFile>images/pokeball.png</pokeballFile>
   <pokeballSrcX>0</pokeballSrcX>
@@ -101,15 +103,15 @@
   <pokeballFrameInterval>12</pokeballFrameInterval>
   <pokeballWidth>29</pokeballWidth>
   <pokeballHeight>28</pokeballHeight>
-  <pokeballScaleMin>0.9</pokeballScaleMin>
-  <pokeballScaleMax>0.9</pokeballScaleMax>
-  <pokeballLoc pokeballX="320" pokeballY="240"/>
+  <pokeballScaleMin>0.97</pokeballScaleMin>
+  <pokeballScaleMax>0.97</pokeballScaleMax>
+  <pokeballLoc pokeballX="-300" pokeballY="-300"/>
   <pokeballSpeed pokeballSpeedX="250" pokeballSpeedY="250"/>
   <pokeballTransparency>true</pokeballTransparency>
 </pokeball>
 
 <mario>
-  <marioLoc marioX="220" marioY="400"/>
+  <marioLoc marioX="120" marioY="400"/>
   <marioSpeedX>300</marioSpeedX>
   <marioSpeedY>200</marioSpeedY>
   <marioFrameInterval>12</marioFrameInterval>
@@ -136,7 +138,7 @@
 </mario>
 
 <yoshi>
-  <yoshiLoc yoshiX="120" yoshiY="400"/>
+  <yoshiLoc yoshiX="320" yoshiY="400"/>
   <yoshiSpeedX>300</yoshiSpeedX>
   <yoshiSpeedY>200</yoshiSpeedY>
   <yoshiFrameInterval>12</yoshiFrameInterval>

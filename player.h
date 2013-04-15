@@ -2,6 +2,7 @@
 #include "frameFactory.h"
 #include "twowayMultisprite.h"
 #include "collisionStrategy.h"
+#include "item.h"
 
 class Player {
 public:
@@ -9,11 +10,14 @@ public:
   virtual ~Player();
 
   virtual void update(Uint32 ticks);
-  virtual void draw() const { sprite->draw(); }
+  virtual void draw() const;
   const Drawable* getSprite() const { return sprite; }
   float getDamage() const { return damage; }
   void damageIncr(float amount = 1.0) { damage += amount; }
 
+  bool hasItem() const { return item!=NULL; }
+  void setItem(Item* it) { item=it; }
+  Item* getItem() const { return item; }
   bool collideWith(const Drawable* d);
   void stop();
   void right();
@@ -31,6 +35,7 @@ private:
   float height;
   float damage;
   CollisionStrategy* cStrat;
+  Item* item;
   std::vector<Frame*> frames;
   std::vector<Frame*> framesLeft;
   TwowayMultiframeSprite* sprite;

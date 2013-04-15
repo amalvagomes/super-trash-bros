@@ -2,12 +2,15 @@
 #include <algorithm>
 #include "sound.h"
 #include "manager.h"
+#include "item.h"
 
 Manager::~Manager() { 
   // These deletions eliminate "definitely lost" and
   // "still reachable"s in Valgrind.
-  for(unsigned i = 0; i < stars.size(); i++) {
-    delete stars[i];
+  std::list<Drawable*>::iterator it = sprites.begin();
+  while(it != sprites.end()) {
+    delete *it;
+    it++;
   }
   SDL_FreeSurface(screen);
   SDL_FreeSurface(midfrontSurface);
@@ -66,9 +69,13 @@ Manager::Manager() :
   viewport( Viewport::getInstance() ),
   player(std::string("mario")),
   player2(std::string("yoshi")),
+  playerPickup(false),
+  player2Pickup(false),
   currentStar(0),
+  itemTimer(gdata->getXmlInt("itemInterval")),
+  itemTime(0),
   displayHelpText(false),
-  stars(),
+  sprites(),
   TICK_INTERVAL( gdata->getXmlInt("tickInterval") ),
   nextTime(clock.getTicks()+TICK_INTERVAL)
 {
@@ -78,22 +85,18 @@ Manager::Manager() :
   atexit(SDL_Quit);
   // We now reserve space for the sprites; thus, obviating 
   // a lot of copies, reallocations, and deletions:
-  FrameFactory& frameFact = FrameFactory::getInstance();
-  stars.reserve(gdata->getXmlInt("shellCount")+2);
-  makeShells();
-  float scale;
-  std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
-  stars.push_back( new MultiframeSprite("pokeball", frames, scale) );
-  sort(stars.begin(), stars.end(), DrawableComparator());
+  makeItems();
+  sprites.sort(DrawableComparator());
   viewport.setObjectToTrack(player.getSprite());
 }
 
-void Manager::makeShells() {
+void Manager::makeItems() {
   FrameFactory& frameFact = FrameFactory::getInstance();
-  for(unsigned i = 0; i < (unsigned)gdata->getXmlInt("shellCount"); i++) {
+  for(unsigned i = 0; i < (unsigned)gdata->getXmlInt("itemCount"); i++) {
     float scale;
-    Frame* frame = frameFact.getFrame("shell", &scale, true);
-    stars.push_back( new Sprite("shell", frame, scale) );
+    std::cout << "Adding pokeball" << std::endl;
+    std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
+    sprites.push_back( new Item("pokeball", frames, scale));
   }
 }
 
@@ -104,41 +107,35 @@ void Manager::draw() const {
   bool foreWorldDrawn = false;
   bool playerDrawn = false;
   bool player2Drawn = false;
-
-  for (unsigned i = 0; i < stars.size(); ++i) {
-    if(!backWorldDrawn && stars[i]->getScale() > backWorld.getScale()) {
+  
+  std::list<Drawable*>::const_iterator it = sprites.begin();
+  while(it != sprites.end()) {
+    if(!backWorldDrawn && (*it)->getScale() > backWorld.getScale()) {
       backWorld.draw();
       backWorldDrawn = true;
     }
-    if(!midWorldDrawn && stars[i]->getScale() > midWorld.getScale()) {
+    if(!midWorldDrawn && (*it)->getScale() > midWorld.getScale()) {
       midWorld.draw();
       midWorldDrawn = true;
     }
-    if(!midfrontWorldDrawn && stars[i]->getScale() > midfrontWorld.getScale()) {
+    if(!midfrontWorldDrawn && (*it)->getScale() > midfrontWorld.getScale()) {
       midfrontWorld.draw();
       midfrontWorldDrawn = true;
     }
-    if(!foreWorldDrawn && stars[i]->getScale() > foreWorld.getScale()) {
+    if(!foreWorldDrawn && (*it)->getScale() > foreWorld.getScale()) {
       foreWorld.draw();
       foreWorldDrawn = true;
     }
-    if(!playerDrawn && stars[i]->getScale() > player.getSprite()->getScale()) {
+    if(!playerDrawn && (*it)->getScale() > player.getSprite()->getScale()) {
       player.draw();
       playerDrawn = true;
     }
-    if(!player2Drawn && stars[i]->getScale() > player2.getSprite()->getScale()) {
+    if(!player2Drawn && (*it)->getScale() > player2.getSprite()->getScale()) {
       player2.draw();
       player2Drawn = true;
     }
-    stars[i]->draw();
-  }
-  if(!playerDrawn) {
-    player.draw();
-    playerDrawn = true;
-  }
-  if(!player2Drawn) {
-    player2.draw();
-    player2Drawn = true;
+    (*it)->draw();
+    it++;
   }
   if(!backWorldDrawn) {
       backWorld.draw();
@@ -151,6 +148,12 @@ void Manager::draw() const {
   }
   if(!foreWorldDrawn) {
       foreWorld.draw();
+  }
+  if(!playerDrawn) {
+      player.draw();
+  }
+  if(!player2Drawn) {
+      player2.draw();
   }
   if(displayHelpText) {
     viewport.draw();
@@ -174,19 +177,14 @@ void Manager::play() {
     SDL_PollEvent(event);
     Uint8 *keystate = SDL_GetKeyState(NULL);
     if (event->type ==  SDL_QUIT) { break; }
-    if(event->type == SDL_KEYUP) { keyCatch = false; }
+    if(event->type == SDL_KEYUP) { 
+        keyCatch = false; 
+        playerPickup = false; 
+        player2Pickup = false; 
+    }
     if(event->type == SDL_KEYDOWN) {
       switch ( event->key.keysym.sym ) {
         case SDLK_ESCAPE : done = true; break;
-
-        case SDLK_t      : {
-          if (!keyCatch) {
-            keyCatch = true;
-            currentStar = (currentStar+1) % stars.size();
-            viewport.setObjectToTrack(stars[currentStar]);
-          }
-          break;
-        }
         case SDLK_p      : {
           if (!keyCatch) {
             keyCatch = true;
@@ -229,8 +227,20 @@ void Manager::play() {
             keyCatch = true;
             io.clearString();
             io.buildString(event);
-            //int n = event.key.keysym.sym - SDLK_0;
-            //int n = 7;
+            if(player2.hasItem()) {
+                Item* item = player2.getItem();
+                item->toggleMovement();
+                item->toggleAnimation();
+                player2.setItem(NULL);
+                item->velocityY(-350.0);
+                float veloc = player2.getSprite()->velocityX();
+                veloc += (veloc/abs(veloc))*300.0;
+                item->velocityX(veloc);
+                sprites.push_back(static_cast<Drawable*>(item));
+                sprites.sort(DrawableComparator());
+            } else {
+                player2Pickup = true;
+            }
             sound[0];
             break;
           }
@@ -239,8 +249,20 @@ void Manager::play() {
             keyCatch = true;
             io.clearString();
             io.buildString(event);
-            //int n = event.key.keysym.sym - SDLK_0;
-            //int n = 7;
+            if(player.hasItem()) {
+                Item* item = player.getItem();
+                item->toggleMovement();
+                item->toggleAnimation();
+                player.setItem(NULL);
+                item->velocityY(player.getSprite()->velocityY()-25.0);
+                float veloc = player.getSprite()->velocityX();
+                veloc += (veloc/abs(veloc))*200.0;
+                item->velocityX(veloc);
+                sprites.push_back(static_cast<Drawable*>(item));
+                sprites.sort(DrawableComparator());
+            } else {
+                playerPickup = true;
+            }
             sound[0];
             break;
           }
@@ -281,18 +303,36 @@ void Manager::play() {
     }
 
     Uint32 ticks = clock.getElapsedTicks();
-    for (unsigned i = 0; i < stars.size(); ++i) {
-      if(foreWorld.getScale()<stars[i]->getScale()) {
-        if(player.collideWith(stars[i])) {
-          player.damageIncr();
+    std::list<Drawable*>::iterator it = sprites.begin();
+    while (it != sprites.end()) {
+      Item* item = dynamic_cast<Item*>(*it);
+      if(item != 0) { 
+        if(!item->isReleased()) { 
+          if(++itemTime == itemTimer) {
+            item->X((int)getRand(0.0,640.0));
+            item->Y(0);
+            item->fall();
+            itemTime = 0;
+          }
+        } else {
+            if(playerPickup && player.collideWith((*it))) {
+                player.setItem(item);
+                playerPickup = false;
+                it = sprites.erase(it);
+                continue;
+                std::cout << "player pickup collision" << std::endl;
+            }
+            if(player2Pickup && player2.collideWith((*it))) {
+                player2.setItem(item);
+                player2Pickup = false;
+                it = sprites.erase(it);
+                continue;
+                std::cout << "player 2 pickup collision" << std::endl;
+            }
         }
       }
-      if(foreWorld.getScale()<stars[i]->getScale()) {
-        if(player2.collideWith(stars[i])) {
-          player2.damageIncr();
-        }
-      }
-      stars[i]->update(ticks);
+      (*it)->update(ticks);
+      it++;
     }
     if(player.collideWith(player2.getSprite())) {
       if(player.getSprite()->X() > player2.getSprite()->X()) {
@@ -310,12 +350,10 @@ void Manager::play() {
         player2.damageIncr(2.0);
         float veloc = player.getSprite()->velocityX();
         const_cast<Drawable*>(player2.getSprite())->velocityX(veloc+(veloc*(player2.getDamage()/75.0)));
-        //player.getSprite()->velocityX(player.getSprite()->velocityX()+player2.getSprite()->velocityX());
       } else {
         player.damageIncr(2.0);
         float veloc = player2.getSprite()->velocityX();
         const_cast<Drawable*>(player.getSprite())->velocityX(veloc+(veloc*(player.getDamage()/75.0)));
-        //player2.getSprite()->velocityX(player.getSprite()->velocityX()+player2.getSprite()->velocityX());
       }
     }
     backWorld.update();
@@ -328,6 +366,7 @@ void Manager::play() {
   }
   delete event;
 }
+
 
 Uint32 Manager::timeLeft() {
   Uint32 now = SDL_GetTicks();

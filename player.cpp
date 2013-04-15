@@ -22,6 +22,7 @@ Player::Player(const string& n) :
   height( gdata->getXmlInt(n+"Height") ),
   damage( 0.0 ),
   cStrat( new PerPixelCollisionStrategy() ),
+  item( NULL ),
   frames(),
   framesLeft(),
   sprite( NULL ),
@@ -32,9 +33,6 @@ Player::Player(const string& n) :
 
 bool Player::collideWith(const Drawable* d) {
   if(cStrat->execute(*(static_cast<Drawable*>(sprite)), *d)) {
-    //double signx = (sprite->velocityX()>0)?-1.0:1.0;
-    //sprite->velocityX(sprite->velocityX()*-1.0 + (damage*signx));
-    //sprite->X(sprite->X()+(signx*20.0));
     return true;
   }
   return false;
@@ -58,6 +56,18 @@ void Player::update(Uint32 ticks) {
     sprite->velocityX(sprite->velocityX()*0.9);
   }
   sprite->update(ticks); 
+  if(hasItem()) {
+    item->stop();
+    item->X(sprite->X()+sprite->getFrame()->getWidth()/2);
+    item->Y(sprite->Y()+sprite->getFrame()->getWidth()/2);
+  }
+}
+
+void Player::draw() const { 
+  sprite->draw(); 
+  if(hasItem()) {
+    item->draw();
+  }
 }
 
 void Player::stop() { 

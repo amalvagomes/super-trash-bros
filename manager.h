@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 
 #include "gamedata.h"
 #include "ioManager.h"
@@ -43,11 +44,15 @@ private:
 
   Player player;
   Player player2;
+  bool playerPickup;
+  bool player2Pickup;
 
   int currentStar;
+  int itemTimer;
+  int itemTime;
   bool displayHelpText;
 
-  std::vector<Drawable*> stars;
+  std::list<Drawable*> sprites;
   const unsigned int TICK_INTERVAL;
   Uint32 nextTime;
 
@@ -56,7 +61,11 @@ private:
   Manager(const Manager&);
   Manager& operator=(const Manager&);
 
-  void makeShells();
+  void makeItems();
+
+  float getRand(float min, float max) {
+    return min + (rand() / (std::numeric_limits<int>::max()+1.0f))*(max-min);
+  }
 
   class DrawableComparator{
     public:
