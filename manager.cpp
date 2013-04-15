@@ -3,6 +3,7 @@
 #include "sound.h"
 #include "manager.h"
 #include "item.h"
+#include "playerDeath.h"
 
 Manager::~Manager() { 
   // These deletions eliminate "definitely lost" and
@@ -12,6 +13,11 @@ Manager::~Manager() {
     delete *it;
     it++;
   }
+
+for (unsigned i = 0; i < playerDeathFrames.size(); ++i) {
+    delete playerDeathFrames[i];
+  }
+  SDL_FreeSurface(deathSurface);
   SDL_FreeSurface(screen);
   SDL_FreeSurface(midbackSurface);
   delete midbackFrame;
@@ -78,6 +84,7 @@ Manager::Manager() :
   ),
   foreWorld( foreFrame, gdata->getXmlFloat("boardwalkScale"), 2.0 ),
   viewport( Viewport::getInstance() ),
+  deathSurface( io.loadAndSet(gdata->getXmlStr("dyingcrowFile"),true) ),
   player(std::string("mario")),
   player2(std::string("yoshi")),
   playerPickup(false),
@@ -87,6 +94,7 @@ Manager::Manager() :
   itemTime(0),
   displayHelpText(false),
   sprites(),
+  playerDeathFrames(),
   TICK_INTERVAL( gdata->getXmlInt("tickInterval") ),
   nextTime(clock.getTicks()+TICK_INTERVAL)
 {
@@ -97,8 +105,23 @@ Manager::Manager() :
   // We now reserve space for the sprites; thus, obviating 
   // a lot of copies, reallocations, and deletions:
   makeItems();
+  makeDeath();
   sprites.sort(DrawableComparator());
   viewport.setObjectToTrack(player.getSprite());
+}
+
+void Manager::makeDeath() {
+  unsigned numberOfFrames = gdata->getXmlInt("dyingcrowFrames");
+  Uint16 pwidth = gdata->getXmlInt("dyingcrowWidth");
+  Uint16 pheight = gdata->getXmlInt("dyingcrowHeight");
+  Uint16 srcX = gdata->getXmlInt("dyingcrowSrcX");
+  Uint16 srcY = gdata->getXmlInt("dyingcrowSrcY");
+
+  for (unsigned i = 0; i < numberOfFrames; ++i) {
+    unsigned frameX = i * pwidth + srcX;
+    playerDeathFrames.push_back( 
+      new Frame(deathSurface, pwidth, pheight, frameX, srcY) );
+  }
 }
 
 void Manager::makeItems() {
@@ -217,7 +240,7 @@ void Manager::play() {
 	case SDLK_k      : {
           if (!keyCatch) {
             keyCatch = true;
-//            killPlayer();
+            killPlayer();
           }
           break;
         }
@@ -370,6 +393,16 @@ void Manager::play() {
             }
         }
       }
+      if(dynamic_cast<PlayerDeath*>(*it) && static_cast<PlayerDeath*>(*it)->isDead()){
+	FrameFactory& frameFact = FrameFactory::getInstance();
+	float scale;
+	std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
+	sprites.push_back( new Item("pokeball", frames, scale));
+	sprites.sort(DrawableComparator());
+	it = sprites.erase(it);
+	continue;
+      }
+
       (*it)->update(ticks);
       it++;
     }
@@ -411,4 +444,22 @@ void Manager::play() {
 Uint32 Manager::timeLeft() {
   Uint32 now = SDL_GetTicks();
   return (nextTime <= now)?0:(nextTime - now);
+}
+
+void Manager::killPlayer() {
+    std::list<Drawable*>::iterator it = sprites.begin();
+    while (it != sprites.end()) {
+      Drawable* sprite (dynamic_cast<Item*>(*it));
+      if(sprite)
+      {
+          MultiframeSprite *tmp = new PlayerDeath(std::string("dyingcrow"),playerDeathFrames);
+          tmp->setPosition(sprite->getPosition());
+	sprite = tmp;
+	  sprites.push_back(sprite);
+   	  it = sprites.erase(it);
+	  return;
+      }
+      else it++;
+    }
+    return;
 }

@@ -45,6 +45,8 @@ private:
   Frame * const foreFrame;
   World foreWorld;
   Viewport& viewport;
+  SDL_Surface * const deathSurface;
+
 
   Player player;
   Player player2;
@@ -57,6 +59,7 @@ private:
   bool displayHelpText;
 
   std::list<Drawable*> sprites;
+  std::vector<Frame*> playerDeathFrames;
   const unsigned int TICK_INTERVAL;
   Uint32 nextTime;
 
@@ -66,6 +69,8 @@ private:
   Manager& operator=(const Manager&);
 
   void makeItems();
+  void makeDeath();
+  void killPlayer();
 
   float getRand(float min, float max) {
     return min + (rand() / (std::numeric_limits<int>::max()+1.0f))*(max-min);
