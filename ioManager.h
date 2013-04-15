@@ -26,7 +26,7 @@ public:
   void printMessageValueAt(const string& msg, T value, 
          Uint32 x, Uint32 y) const;
 
-  void buildString(SDL_Event);
+  void buildString(SDL_Event*);
   void clearString() { inputString = ""; }
   const string& getString() const { return inputString; }
 private:
