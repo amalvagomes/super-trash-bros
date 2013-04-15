@@ -14,6 +14,7 @@ public:
   SDL_Surface * getScreen() const { return screen; }
   ~IOManager() { 
     TTF_CloseFont(font);
+    TTF_CloseFont(damageFont);
   }
   SDL_Surface* loadAndSet(const string filename, bool setcolorkey) const;
 
