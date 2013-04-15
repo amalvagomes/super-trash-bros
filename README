@@ -1,41 +1,24 @@
-Antonio MalvaGomes
-amalvag@g.clemson.edu
-March 25th, 2013
-Project #3
+Ehtan Black, Nitin Madhok, and Antonio MalvaGomes
+ethanb@g.clemson.edu, nmadhok@g.clemson.edu, amalvag@g.clemson.edu
+April 15th, 2013
+Project #4
 
 Accomplished:
-* Added the player class and worked in the FrameFactory with it
-* Did some sprite surgery to make the multiple backgrounds for parallax scrolling
-* Made Drawable::scale and incorporated it into the inheritance hierarchy so that all sprites can be scaled
-  - Scaling for multiframe and two-way multiframe sprites is stubbed at the moment, but seems doable
-  - This allows for all sprites to be sorted via polymorphism to accomplish the Painter's Algorithm
-  - Used a comparator function object for the sort
-* incorporated the FPS capping mentioned in class (though I'm still not sure it is platform independent)
-* Made a HUD with small rectangular background
+ * Added collisions between players via CollisionStrategy and per-pixel collisions.
+ * Added damage to players on collisions with other players
+ * Items fall from the top of the game and can be picked up via the '/' or the 'q' keys respectively
+ * An item being held by a player can be thrown via the '/' key or the 'q' key, respectively
 
 Extras:
-* Converted the world scroll factor to a float for more flexibility
-* Found a simpler way of drawing lines (rectangles) via SDL calls
-  - In essence, avoided 200+ lines of code seen in the example (aalines)
+ * Added a different player with separate controls
+ * Damage monitors now display on the HUD
 
 Did Not Accomplish:
-* Attempted to make the player "jump" when the up key is pressed.  Ended up ruining the up functionality altogether,
-  so I stubbed it for later.  It'll work... eventually.
-* Attempted to fix all the errors valgrind found after I worked all the memory leaks out of the code.
-  Pretty sure that 4 of them are SDL's fault.  The others I get seem to be the result of "uninitialised" memory usage.
-  It looks like valgrind thinks that either ioManager::loadAndSet should not take a string pass-by-reference, or that 
-  we have to allocate strings ahead of time via Gamedata and then pass them into the initializers.  The latter seems 
-  like a great idea until you realize that Manager is where everything begins and much of the load would have to be 
-  redistributed to main.  This is C++.  We do OOP, not procedural C code.  Not sure what to do about these errors.
 
 XML Schema Change Log:
-MinY - added to Player to control maximum allowable "up"
-ScaleMin - added to all sprites to control low value for range of sizes possible
-ScaleMax - added to all sprites to control high value for range of sizes possible
-tickInterval - added to control framerate cap (see email about this one)
-JumpCount - stubbed value for jumping functionality
-JumpTick - stubbed value for jump length
+itemCount - The number of pokeballs that spawn
+itemInterval - The amount of time between pokeballs falling from the top
 
-Sprite Sources:
-Background Sunset and Trees - http://www.hdwallpapers.in/beautiful_sunset_hd-wallpapers.html
-Boardwalk - subtlepatterns.com
+Special Thanks:
+Tyler Cook - background music from "Robopop" off his album "Electrock Retrospective, Volume 1: Dance Party"
+    http://electrock.bandcamp.com/album/electrock-retrospective-volume-i-dance-party
