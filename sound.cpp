@@ -32,7 +32,7 @@ SDLSound::SDLSound() :
   music = Mix_LoadMUS("sound/Robobop.mp3");
   // Need to install midi to play the following:
   //music = Mix_LoadMUS("sound/ballad2.mid");
-  if (!music) throw string("Couldn't load 100Years.mp3")+Mix_GetError();
+  if (!music) throw string("Couldn't load Game Sound")+Mix_GetError();
 
   startMusic();
   sounds.reserve(1);
