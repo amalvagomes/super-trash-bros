@@ -21,7 +21,7 @@ PlayerDeath(const std::string& name, const std::vector<Frame*>& fm) :
   MultiframeSprite(name, fm, 1.0),
   dead(false),
   timeSinceLastFrame( 0 ),
-  deathInterval(Gamedata::getInstance()->getXmlInt("PlayerDeathFrameInterval"))
+  deathInterval(Gamedata::getInstance()->getXmlInt(name+"FrameInterval"))
 { }
 
 PlayerDeath::PlayerDeath(const PlayerDeath& s) :
