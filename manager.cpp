@@ -132,6 +132,14 @@ void Manager::draw() const {
     }
     stars[i]->draw();
   }
+  if(!playerDrawn) {
+    player.draw();
+    playerDrawn = true;
+  }
+  if(!player2Drawn) {
+    player2.draw();
+    player2Drawn = true;
+  }
   if(!backWorldDrawn) {
       backWorld.draw();
   }
