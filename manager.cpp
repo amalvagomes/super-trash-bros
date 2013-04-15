@@ -13,6 +13,8 @@ Manager::~Manager() {
     it++;
   }
   SDL_FreeSurface(screen);
+  SDL_FreeSurface(midbackSurface);
+  delete midbackFrame;
   SDL_FreeSurface(midfrontSurface);
   delete midfrontFrame;
   SDL_FreeSurface(midSurface);
