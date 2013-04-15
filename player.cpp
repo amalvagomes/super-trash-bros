@@ -104,3 +104,33 @@ void Player::down()  {
   }
 } 
 
+
+void Player::leftaccelerate() {
+  keyPressed = true;
+  if ( sprite->X() > 0) {
+    sprite->velocityX(-initialVelocity[0]-500);
+  }
+
+  else if ( sprite->X() < worldWidth-width) {
+      sprite->velocityX(initialVelocity[0]-500);
+  }
+
+}
+
+void Player::rightaccelerate() {
+  keyPressed = true;
+  if ( sprite->X() > 0) {
+    sprite->velocityX(-initialVelocity[0]+1000);
+  }
+
+  else if ( sprite->X() < worldWidth-width) {
+      sprite->velocityX(initialVelocity[0]+1000);
+  }
+
+}
+
+void Player::jump() {
+  keyPressed = true;
+  if(!sprite->velocityY())
+    sprite->velocityY(-400);
+}

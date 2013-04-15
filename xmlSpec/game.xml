@@ -3,12 +3,12 @@
 
 <view>
   <viewWidth>640</viewWidth>
-  <viewHeight>480</viewHeight>
+  <viewHeight>580</viewHeight>
 </view>
 
 <world>
-  <worldWidth>780</worldWidth>
-  <worldHeight>480</worldHeight>
+  <worldWidth>3000</worldWidth>
+  <worldHeight>580</worldHeight>
 </world>
 <tickInterval>17</tickInterval>
 
@@ -30,11 +30,11 @@
 <maxStringSize>50</maxStringSize>
 
 <back>
-  <backFile>images/sunset.jpg</backFile>
+  <backFile>images/Sprites/sky.png</backFile>
   <backSrcX>0</backSrcX>
   <backSrcY>0</backSrcY>
-  <backWidth>640</backWidth>
-  <backHeight>480</backHeight>
+  <backWidth>1510</backWidth>
+  <backHeight>580</backHeight>
   <backLoc backX="0" backY="0"/>
   <backSpeed backSpeedX="0" backSpeedY="0"/>
   <backTransparency>false</backTransparency>
@@ -42,11 +42,11 @@
 </back>
 
 <mid>
-  <midFile>images/mountainsback.png</midFile>
+  <midFile>images/Sprites/mountain-back.png</midFile>
   <midSrcX>0</midSrcX>
   <midSrcY>0</midSrcY>
-  <midWidth>640</midWidth>
-  <midHeight>480</midHeight>
+  <midWidth>1510</midWidth>
+  <midHeight>580</midHeight>
   <midLoc midX="0" midY="0"/>
   <midSpeed midSpeedX="0" midSpeedY="0"/>
   <midTransparency>false</midTransparency>
@@ -54,23 +54,37 @@
 </mid>
 
 <midfront>
-  <midfrontFile>images/mountains.png</midfrontFile>
+  <midfrontFile>images/Sprites/mountain-front.png</midfrontFile>
   <midfrontSrcX>0</midfrontSrcX>
   <midfrontSrcY>0</midfrontSrcY>
-  <midfrontWidth>640</midfrontWidth>
-  <midfrontHeight>480</midfrontHeight>
+  <midfrontWidth>1510</midfrontWidth>
+  <midfrontHeight>580</midfrontHeight>
   <midfrontLoc midfrontX="0" midfrontY="0"/>
   <midfrontSpeed midfrontSpeedX="0" midfrontSpeedY="0"/>
   <midfrontTransparency>false</midfrontTransparency>
   <midfrontScale>0.5</midfrontScale>
 </midfront>
 
+<midback>
+  <midbackFile>images/Sprites/buildings.png</midbackFile>
+  <midbackSrcX>0</midbackSrcX>
+  <midbackSrcY>0</midbackSrcY>
+  <midbackWidth>1510</midbackWidth>
+  <midbackHeight>580</midbackHeight>
+  <midbackLoc midbackX="0" midbackY="0"/>
+  <midbackSpeed midbackSpeedX="0" midbackSpeedY="0"/>
+  <midbackTransparency>false</midbackTransparency>
+  <midbackScale>0.5</midbackScale>
+</midback>
+
+
+
 <boardwalk>
-  <boardwalkFile>images/boardwalk.png</boardwalkFile>
+  <boardwalkFile>images/Sprites/road.png</boardwalkFile>
   <boardwalkSrcX>0</boardwalkSrcX>
   <boardwalkSrcY>0</boardwalkSrcY>
-  <boardwalkWidth>640</boardwalkWidth>
-  <boardwalkHeight>480</boardwalkHeight>
+  <boardwalkWidth>1510</boardwalkWidth>
+  <boardwalkHeight>580</boardwalkHeight>
   <boardwalkLoc boardwalkX="0" boardwalkY="0"/>
   <boardwalkSpeed boardwalkSpeedX="0" boardwalkSpeedY="0"/>
   <boardwalkTransparency>false</boardwalkTransparency>
@@ -141,21 +155,49 @@
   <yoshiLoc yoshiX="320" yoshiY="400"/>
   <yoshiSpeedX>300</yoshiSpeedX>
   <yoshiSpeedY>200</yoshiSpeedY>
+  <yoshiFrameInterval>8</yoshiFrameInterval>
+  <yoshiFile>images/luigi_nitin.png</yoshiFile>
+  <yoshiFrames>8</yoshiFrames>
+  <yoshiSrcX>0</yoshiSrcX>
+  <yoshiSrcY>0</yoshiSrcY>
+  <yoshiWidth>38</yoshiWidth>
+  <yoshiHeight>85</yoshiHeight>
+  <yoshiScaleMin>1.0</yoshiScaleMin>
+  <yoshiScaleMax>1.0</yoshiScaleMax>
+  <yoshiTransparency>true</yoshiTransparency>
+  <yoshiLeftFrameInterval>8</yoshiLeftFrameInterval>
+  <yoshiLeftFile>images/luigi_nitin.png</yoshiLeftFile>
+  <yoshiLeftFrames>8</yoshiLeftFrames>
+  <yoshiLeftSrcX>5</yoshiLeftSrcX>
+  <yoshiLeftSrcY>86</yoshiLeftSrcY>
+  <yoshiLeftWidth>38</yoshiLeftWidth>
+  <yoshiLeftHeight>85</yoshiLeftHeight>
+  <yoshiLeftScaleMin>1.0</yoshiLeftScaleMin>
+  <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>
+  <yoshiLeftTransparency>true</yoshiLeftTransparency>
+  <yoshiMinY>380</yoshiMinY>
+  <yoshiJumpVelocity>200</yoshiJumpVelocity>
+</yoshi>
+
+<yoshi>
+  <yoshiLoc yoshiX="120" yoshiY="400"/>
+  <yoshiSpeedX>300</yoshiSpeedX>
+  <yoshiSpeedY>200</yoshiSpeedY>
   <yoshiFrameInterval>12</yoshiFrameInterval>
   <yoshiFile>images/yoshi_run.png</yoshiFile>
   <yoshiFrames>9</yoshiFrames>
   <yoshiSrcX>0</yoshiSrcX>
   <yoshiSrcY>89</yoshiSrcY>
-  <yoshiWidth>99</yoshiWidth>
-  <yoshiHeight>88</yoshiHeight>
+  <yoshiWidth>98</yoshiWidth>
+  <yoshiHeight>89</yoshiHeight>
   <yoshiScaleMin>1.0</yoshiScaleMin>
   <yoshiScaleMax>1.0</yoshiScaleMax>
   <yoshiTransparency>true</yoshiTransparency>
   <yoshiLeftFile>images/yoshi_run.png</yoshiLeftFile>
   <yoshiLeftFrames>9</yoshiLeftFrames>
   <yoshiLeftSrcX>0</yoshiLeftSrcX>
-  <yoshiLeftSrcY>0</yoshiLeftSrcY>
-  <yoshiLeftWidth>99</yoshiLeftWidth>
+  <yoshiLeftSrcY>89</yoshiLeftSrcY>
+  <yoshiLeftWidth>98</yoshiLeftWidth>
   <yoshiLeftHeight>88</yoshiLeftHeight>
   <yoshiLeftScaleMin>1.0</yoshiLeftScaleMin>
   <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>

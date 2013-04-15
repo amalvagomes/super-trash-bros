@@ -101,7 +101,7 @@ void Item::update(Uint32 ticks) {
     velocityX(0.0);
   } else {
     velocityX(velocityX()*(1.0-(ticks*.001)));
-    if(Y()<420) {
+    if(Y()<520) {
         float veloc = velocityY();
         velocityY((veloc<200.0)?veloc+(ticks*0.01):200.0);
     } else {
