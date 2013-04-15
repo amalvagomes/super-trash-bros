@@ -36,6 +36,10 @@ private:
   SDL_Surface * const midfrontSurface;
   Frame * const midfrontFrame;
   World midfrontWorld;
+  SDL_Surface * const midbackSurface;
+  Frame * const midbackFrame;
+  World midbackWorld;
+
   SDL_Surface * const foreSurface;
   Frame * const foreFrame;
   World foreWorld;

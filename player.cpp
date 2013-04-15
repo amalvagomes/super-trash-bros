@@ -98,11 +98,11 @@ void Player::down()  {
 void Player::leftaccelerate() {
   keyPressed = true;
   if ( sprite->X() > 0) {
-    sprite->velocityX(-initialVelocity[0]-1000);
+    sprite->velocityX(-initialVelocity[0]-500);
   }
 
   else if ( sprite->X() < worldWidth-width) {
-      sprite->velocityX(initialVelocity[0]-1000);
+      sprite->velocityX(initialVelocity[0]-500);
   }
 
 }
@@ -119,3 +119,8 @@ void Player::rightaccelerate() {
 
 }
 
+void Player::jump() {
+  keyPressed = true;
+  if(!sprite->velocityY())
+    sprite->velocityY(-400);
+}

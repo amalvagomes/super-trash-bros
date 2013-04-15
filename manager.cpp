@@ -35,7 +35,7 @@ Manager::Manager() :
                 gdata->getXmlInt("backSrcX"), 
                 gdata->getXmlInt("backSrcY")) 
   ),
-  backWorld( backFrame, gdata->getXmlFloat("backScale"), 2.0),
+  backWorld( backFrame, gdata->getXmlFloat("backScale"), 5.0),
   midSurface( io.loadAndSet(gdata->getXmlStr("midFile"), 
                 gdata->getXmlBool("midTransparency")) ),
   midFrame(new Frame(midSurface,
@@ -44,7 +44,7 @@ Manager::Manager() :
                 gdata->getXmlInt("midSrcX"), 
                 gdata->getXmlInt("midSrcY")) 
   ),
-  midWorld( midFrame, gdata->getXmlFloat("midScale"), 1.5 ),
+  midWorld( midFrame, gdata->getXmlFloat("midScale"), 4.0 ),
   midfrontSurface( io.loadAndSet(gdata->getXmlStr("midfrontFile"), 
                 gdata->getXmlBool("midfrontTransparency")) ),
   midfrontFrame(new Frame(midfrontSurface,
@@ -53,7 +53,16 @@ Manager::Manager() :
                 gdata->getXmlInt("midfrontSrcX"), 
                 gdata->getXmlInt("midfrontSrcY")) 
   ),
-  midfrontWorld( midfrontFrame, gdata->getXmlFloat("midfrontScale"), 1.2 ),
+  midfrontWorld( midfrontFrame, gdata->getXmlFloat("midfrontScale"), 3.0 ),
+  midbackSurface( io.loadAndSet(gdata->getXmlStr("midbackFile"),
+                gdata->getXmlBool("midbackTransparency")) ),
+  midbackFrame(new Frame(midbackSurface,
+                gdata->getXmlInt("midbackWidth"),
+                gdata->getXmlInt("midbackHeight"),
+                gdata->getXmlInt("midbackSrcX"),
+                gdata->getXmlInt("midbackSrcY"))
+  ),
+  midbackWorld( midbackFrame, gdata->getXmlFloat("midbackScale"), 2.0 ),
   foreSurface( io.loadAndSet(gdata->getXmlStr("boardwalkFile"), 
                 gdata->getXmlBool("boardwalkTransparency")) ),
   foreFrame(new Frame(foreSurface,
@@ -62,7 +71,7 @@ Manager::Manager() :
                 gdata->getXmlInt("boardwalkSrcX"), 
                 gdata->getXmlInt("boardwalkSrcY")) 
   ),
-  foreWorld( foreFrame, gdata->getXmlFloat("boardwalkScale")),
+  foreWorld( foreFrame, gdata->getXmlFloat("boardwalkScale"), 2.0 ),
   viewport( Viewport::getInstance() ),
   player(std::string("mario")),
   player2(std::string("yoshi")),
@@ -101,6 +110,7 @@ void Manager::draw() const {
   bool backWorldDrawn = false;
   bool midWorldDrawn = false;
   bool midfrontWorldDrawn = false;
+  bool midbackWorldDrawn = false;
   bool foreWorldDrawn = false;
   bool playerDrawn = false;
   bool player2Drawn = false;
@@ -118,6 +128,12 @@ void Manager::draw() const {
       midfrontWorld.draw();
       midfrontWorldDrawn = true;
     }
+
+    if(!midbackWorldDrawn && stars[i]->getScale() > midbackWorld.getScale()) {
+      midbackWorld.draw();
+      midbackWorldDrawn = true;
+    }
+
     if(!foreWorldDrawn && stars[i]->getScale() > foreWorld.getScale()) {
       foreWorld.draw();
       foreWorldDrawn = true;
@@ -132,14 +148,6 @@ void Manager::draw() const {
     }
     stars[i]->draw();
   }
-  if(!playerDrawn) {
-    player.draw();
-    playerDrawn = true;
-  }
-  if(!player2Drawn) {
-    player2.draw();
-    player2Drawn = true;
-  }
   if(!backWorldDrawn) {
       backWorld.draw();
   }
@@ -149,8 +157,20 @@ void Manager::draw() const {
   if(!midfrontWorldDrawn) {
       midfrontWorld.draw();
   }
+  if(!midbackWorldDrawn) {
+      midbackWorld.draw();
+  }
+
   if(!foreWorldDrawn) {
       foreWorld.draw();
+  }
+  if(!playerDrawn) {
+    player.draw();
+    playerDrawn = true;
+  }
+  if(!player2Drawn) {
+    player2.draw();
+    player2Drawn = true;
   }
   if(displayHelpText) {
     viewport.draw();
@@ -224,7 +244,7 @@ void Manager::play() {
           break;
         }
 
-        case SDLK_q      :
+        case SDLK_q      : {
           if (!keyCatch) {
             keyCatch = true;
             io.clearString();
@@ -232,9 +252,10 @@ void Manager::play() {
             //int n = event.key.keysym.sym - SDLK_0;
             //int n = 7;
             sound[0];
-            break;
           }
-        case SDLK_SLASH  :
+	  break;
+	}
+        case SDLK_SLASH  : {
           if (!keyCatch) {
             keyCatch = true;
             io.clearString();
@@ -242,55 +263,63 @@ void Manager::play() {
             //int n = event.key.keysym.sym - SDLK_0;
             //int n = 7;
             sound[0];
-            break;
           }
+	  break;
+	}
 	default         : {
             if (!keyCatch) {
               keyCatch = true;
               io.buildString(event);
-              break;
+              //break;
             }
+	    break;
 	}
       }
-
-//        default          : break;
-      if(keystate[SDLK_LEFT]) {
-        player.left();
-      }
-      if(keystate[SDLK_DOWN]) {
-        player.down();
-      }
-      if(keystate[SDLK_UP]) {
-        player.up();
-      }
-      if(keystate[SDLK_RIGHT]) {
-        player.right();
-      }
-      if(keystate[SDLK_RSHIFT] && keystate[SDLK_LEFT]) {
-        player.leftaccelerate();
-      }
-      if(keystate[SDLK_RSHIFT] && keystate[SDLK_RIGHT]) {
-        player.rightaccelerate();
-      }
-      if(keystate[SDLK_a]) {
-        player2.left();
-      }
-      if(keystate[SDLK_s]) {
-        player2.down();
-      }
-      if(keystate[SDLK_w]) {
-        player2.up();
-      }
-      if(keystate[SDLK_d]) {
-        player2.right();
-      }
-      if(keystate[SDLK_e] && keystate[SDLK_a]) {
-        player2.leftaccelerate();
-      }
-      if(keystate[SDLK_e] && keystate[SDLK_d]) {
-        player2.rightaccelerate();
+    }
+    if(keystate[SDLK_LEFT]) {
+       player.left();
+    }
+    if(keystate[SDLK_DOWN]) {
+      player.down();
+    }
+    if(keystate[SDLK_UP]) {
+      player.up();
+    }
+    if(keystate[SDLK_RIGHT]) {
+      player.right();
+    }
+    if(keystate[SDLK_RSHIFT] && keystate[SDLK_LEFT]) {
+      player.leftaccelerate();
+    }
+    if(keystate[SDLK_RSHIFT] && keystate[SDLK_RIGHT]) {
+      player.rightaccelerate();
+    }
+    if(keystate[SDLK_a]) {
+      player2.left();
+    }
+    if(keystate[SDLK_s]) {
+      player2.down();
+    }
+    if(keystate[SDLK_w]) {
+      player2.up();
+    }
+    if(keystate[SDLK_d]) {
+      player2.right();
+    }
+    if(keystate[SDLK_e] && keystate[SDLK_a]) {
+      player2.leftaccelerate();
+    }
+    if(keystate[SDLK_e] && keystate[SDLK_d]) {
+      player2.rightaccelerate();
+    }
+    if(keystate[SDLK_SPACE]) {
+      if (!keyCatch) {
+      	keyCatch = true;
+       	player.jump();
+	cout<<"Jumped -- "<<endl;
       }
     }
+    
 
     Uint32 ticks = clock.getElapsedTicks();
     for (unsigned i = 0; i < stars.size(); ++i) {
@@ -333,6 +362,7 @@ void Manager::play() {
     backWorld.update();
     midWorld.update();
     midfrontWorld.update();
+    midbackWorld.update();
     foreWorld.update();
     player.update(ticks);
     player2.update(ticks);
