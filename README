@@ -1,17 +1,18 @@
-Ehtan Black, Nitin Madhok, and Antonio MalvaGomes
+Ethan Black, Nitin Madhok, and Antonio MalvaGomes
 ethanb@g.clemson.edu, nmadhok@g.clemson.edu, amalvag@g.clemson.edu
 April 15th, 2013
 Project #4
 
 Accomplished:
  * Added collisions between players via CollisionStrategy and per-pixel collisions.
- * Added damage to players on collisions with other players
- * Items fall from the top of the game and can be picked up via the '/' or the 'q' keys respectively
- * An item being held by a player can be thrown via the '/' key or the 'q' key, respectively
-
+ * Added damage to players on collisions with other players.
+ * Items fall from the top of the game and can be picked up via the '/' or the 'q' keys respectively.
+ * An item being held by a player can be thrown via the '/' key or the 'q' key, respectively.
+ * Added Sprint feature so that both players can sprint on pressing the 'e' key or the 'RSHIFT' key.
+ * Added Sound Module with a background soundtrack.
 Extras:
- * Added a different player with separate controls
- * Damage monitors now display on the HUD
+ * Added a different player with separate controls (Total 2 players).
+ * Damage monitors now display on the HUD.
 
 Did Not Accomplish:
 
