@@ -94,8 +94,6 @@ void Item::update(Uint32 ticks) {
     currentFrame = 0;
   }
 
-  float xDelta = velocityX();
-  float yDelta = velocityY();
   if(stopped) {
     velocityY(0.0);
     velocityX(0.0);
@@ -107,11 +105,6 @@ void Item::update(Uint32 ticks) {
     } else {
         velocityY(0.0);
     }
-  }
-  xDelta = velocityX() - xDelta;
-  yDelta = velocityY() - yDelta;
-  if(xDelta != 0.0 && yDelta != 0.0) {
-    std::cout << "item - " << velocityX() << " " << velocityY() << std::endl;
   }
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
