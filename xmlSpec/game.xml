@@ -7,7 +7,7 @@
 </view>
 
 <world>
-  <worldWidth>2560</worldWidth>
+  <worldWidth>780</worldWidth>
   <worldHeight>480</worldHeight>
 </world>
 <tickInterval>17</tickInterval>

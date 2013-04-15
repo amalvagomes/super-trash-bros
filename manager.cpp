@@ -129,12 +129,6 @@ void Manager::draw() const {
       player2.draw();
       player2Drawn = true;
     }
-    if(playerDrawn) {
-      player.collideWith(stars[i]);
-    }
-    if(player2Drawn) {
-      player2.collideWith(stars[i]);
-    }
     stars[i]->draw();
   }
   if(!backWorldDrawn) {
@@ -250,7 +244,41 @@ void Manager::play() {
 
     Uint32 ticks = clock.getElapsedTicks();
     for (unsigned i = 0; i < stars.size(); ++i) {
+      if(foreWorld.getScale()<stars[i]->getScale()) {
+        if(player.collideWith(stars[i])) {
+          player.damageIncr();
+        }
+      }
+      if(foreWorld.getScale()<stars[i]->getScale()) {
+        if(player2.collideWith(stars[i])) {
+          player2.damageIncr();
+        }
+      }
       stars[i]->update(ticks);
+    }
+    if(player.collideWith(player2.getSprite())) {
+      if(player.getSprite()->X() > player2.getSprite()->X()) {
+        float x1 = player.getSprite()->X();
+        float x2 = player2.getSprite()->X();
+        const_cast<Drawable*>(player.getSprite())->X(x1+10);
+        const_cast<Drawable*>(player2.getSprite())->X(x2-10);
+      } else {
+        float x1 = player.getSprite()->X();
+        float x2 = player2.getSprite()->X();
+        const_cast<Drawable*>(player.getSprite())->X(x1-10);
+        const_cast<Drawable*>(player2.getSprite())->X(x2+10);
+      }
+      if(abs(player.getSprite()->velocityX()) > abs(player2.getSprite()->velocityX())) {
+        player2.damageIncr(2.0);
+        float veloc = player.getSprite()->velocityX();
+        const_cast<Drawable*>(player2.getSprite())->velocityX(veloc+(veloc*(player2.getDamage()/75.0)));
+        //player.getSprite()->velocityX(player.getSprite()->velocityX()+player2.getSprite()->velocityX());
+      } else {
+        player.damageIncr(2.0);
+        float veloc = player2.getSprite()->velocityX();
+        const_cast<Drawable*>(player.getSprite())->velocityX(veloc+(veloc*(player.getDamage()/75.0)));
+        //player2.getSprite()->velocityX(player.getSprite()->velocityX()+player2.getSprite()->velocityX());
+      }
     }
     backWorld.update();
     midWorld.update();

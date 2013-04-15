@@ -12,8 +12,9 @@ public:
   virtual void draw() const { sprite->draw(); }
   const Drawable* getSprite() const { return sprite; }
   float getDamage() const { return damage; }
+  void damageIncr(float amount = 1.0) { damage += amount; }
 
-  void collideWith(const Drawable* d) const;
+  bool collideWith(const Drawable* d);
   void stop();
   void right();
   void left();

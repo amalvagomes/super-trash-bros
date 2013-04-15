@@ -20,7 +20,7 @@ Player::Player(const string& n) :
   ), 
   width( gdata->getXmlInt(n+"Width") ), 
   height( gdata->getXmlInt(n+"Height") ),
-  damage( 41.2 ),
+  damage( 0.0 ),
   cStrat( new PerPixelCollisionStrategy() ),
   frames(),
   framesLeft(),
@@ -30,16 +30,14 @@ Player::Player(const string& n) :
   makeSprite();
 }
 
-void Player::collideWith(const Drawable* d) const {
+bool Player::collideWith(const Drawable* d) {
   if(cStrat->execute(*(static_cast<Drawable*>(sprite)), *d)) {
-    double signx = (sprite->velocityX()>0)?-1.0:1.0;
-    double signy = (sprite->velocityY()>0)?-1.0:1.0;
-    sprite->velocityX(sprite->velocityX()*-1.0 + (damage*signx));
-    sprite->velocityY(sprite->velocityY()*-1.0 + (damage*signy));
-    sprite->X(sprite->X()+(signx*10.0));
-    sprite->Y(sprite->Y()+(signy*10.0));
-    std::cout << name << " collided" << std::endl;
+    //double signx = (sprite->velocityX()>0)?-1.0:1.0;
+    //sprite->velocityX(sprite->velocityX()*-1.0 + (damage*signx));
+    //sprite->X(sprite->X()+(signx*20.0));
+    return true;
   }
+  return false;
 }
 
 void Player::makeSprite() {
@@ -68,16 +66,17 @@ void Player::stop() {
 }
 
 void Player::right() { 
-  keyPressed = true;
-  if ( sprite->X() < worldWidth-width) {
-    sprite->velocityX(initialVelocity[0]);
+  if ( sprite->X() < worldWidth-width && sprite->velocityX()<200.0) {
+    sprite->velocityX(sprite->velocityX()+initialVelocity[0]);
   }
+  keyPressed = true;
 } 
 void Player::left()  { 
-  keyPressed = true;
-  if ( sprite->X() > 0) {
-    sprite->velocityX(-initialVelocity[0]);
+  if ( sprite->X() > 0 && sprite->velocityX()>-200.0) {
+    sprite->velocityX(sprite->velocityX()-initialVelocity[0]);
+    //sprite->velocityX(-initialVelocity[0]);
   }
+  keyPressed = true;
 } 
 void Player::up() { 
   keyPressed = true;
