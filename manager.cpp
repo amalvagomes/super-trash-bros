@@ -1,6 +1,7 @@
 #include <cmath>
-#include "manager.h"
 #include <algorithm>
+#include "sound.h"
+#include "manager.h"
 
 Manager::~Manager() { 
   // These deletions eliminate "definitely lost" and
@@ -152,7 +153,7 @@ void Manager::draw() const {
 
 void Manager::play() {
   SDL_Event* event = new SDL_Event();
-
+  SDLSound sound;
   bool done = false;
   bool keyCatch = false;
   while ( ! done ) {
@@ -169,7 +170,7 @@ void Manager::play() {
     if(event->type == SDL_KEYDOWN) {
       switch ( event->key.keysym.sym ) {
         case SDLK_ESCAPE : done = true; break;
-        case SDLK_q      : done = true; break;
+
         case SDLK_t      : {
           if (!keyCatch) {
             keyCatch = true;
@@ -214,8 +215,37 @@ void Manager::play() {
           }
           break;
         }
-        default          : break;
+
+        case SDLK_q      :
+          if (!keyCatch) {
+            keyCatch = true;
+            io.clearString();
+            io.buildString(event);
+            //int n = event.key.keysym.sym - SDLK_0;
+            //int n = 7;
+            sound[0];
+            break;
+          }
+        case SDLK_SLASH  :
+          if (!keyCatch) {
+            keyCatch = true;
+            io.clearString();
+            io.buildString(event);
+            //int n = event.key.keysym.sym - SDLK_0;
+            //int n = 7;
+            sound[0];
+            break;
+          }
+	default         : {
+            if (!keyCatch) {
+              keyCatch = true;
+              io.buildString(event);
+              break;
+            }
+	}
       }
+
+//        default          : break;
       if(keystate[SDLK_LEFT]) {
         player.left();
       }

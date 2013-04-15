@@ -134,14 +134,14 @@ void IOManager::printStringAfterMessage( const string& msg,
    printMessageAt(msg+inputString, x, y);
 }
 
-void IOManager::buildString(SDL_Event event) {
+void IOManager::buildString(SDL_Event* event) {
   if( inputString.size() <= MAX_STRING_SIZE) {
-    unsigned ch = event.key.keysym.sym;
+    unsigned ch = event->key.keysym.sym;
     if ( isalpha(ch) || isdigit(ch) || ch == ' ') {
-      inputString += char(event.key.keysym.unicode);
+      inputString += char(event->key.keysym.unicode);
     }
   }     
-  if( event.key.keysym.sym == SDLK_BACKSPACE
+  if( event->key.keysym.sym == SDLK_BACKSPACE
       && inputString.length() > 0 ) {
       // remove a character from the end
       int length = inputString.size();

@@ -22,7 +22,7 @@ public:
 private:
   const bool env;
   const Gamedata* gdata;
-  const IOManager& io;
+  IOManager& io;
   Clock& clock;
 
   SDL_Surface *screen;
