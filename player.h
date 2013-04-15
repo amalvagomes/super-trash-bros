@@ -20,6 +20,8 @@ public:
   void left();
   void up();
   void down();
+  void leftaccelerate();
+  void rightaccelerate();
 
 private:
   const Gamedata* gdata;

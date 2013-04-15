@@ -258,6 +258,12 @@ void Manager::play() {
       if(keystate[SDLK_RIGHT]) {
         player.right();
       }
+      if(keystate[SDLK_RSHIFT] && keystate[SDLK_LEFT]) {
+        player.leftaccelerate();
+      }
+      if(keystate[SDLK_RSHIFT] && keystate[SDLK_RIGHT]) {
+        player.rightaccelerate();
+      }
       if(keystate[SDLK_a]) {
         player2.left();
       }
@@ -269,6 +275,12 @@ void Manager::play() {
       }
       if(keystate[SDLK_d]) {
         player2.right();
+      }
+      if(keystate[SDLK_e] && keystate[SDLK_a]) {
+        player2.leftaccelerate();
+      }
+      if(keystate[SDLK_e] && keystate[SDLK_d]) {
+        player2.rightaccelerate();
       }
     }
 
