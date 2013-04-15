@@ -31,7 +31,7 @@ void Viewport::draw() const {
   bg.x = 10;
   bg.y = 5;
   bg.w = 620;
-  bg.h = 110;
+  bg.h = 130;
   SDL_FillRect(io.getScreen(), &bg, SDL_MapRGBA(io.getScreen()->format, 100,100,100,70));
   io.printMessageCenteredAt(
     gdata->getXmlStr("caption"),
@@ -44,7 +44,7 @@ void Viewport::draw() const {
   io.printMessageCenteredAt("Mario:  Move using arrow keys | Pick/Shoot Pokeball using / | Sprint using RSHIFT", 70);
 //  io.printMessageCenteredAt("Move Luigi using a s d w keys", 110);
   io.printMessageCenteredAt("Luigi:  Move using a s d w keys | Pick/Shoot Pokeball using q | Sprint using e", 90);
-
+  io.printMessageCenteredAt("Press 'k' to destroy the pokeball", 110);
   Clock& clock = Clock::getInstance();
   io.printMessageValueAt("FPS: ",clock.getFps(), 15, 7);
 }
