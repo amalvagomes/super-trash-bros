@@ -22,6 +22,7 @@ XML Schema Change Log:
 itemCount - The number of pokeballs that spawn
 itemInterval - The amount of time between pokeballs falling from the top
 dyingCrow - We stole your animation.  We'll get another soon -- we promise!
+Memory Leaks? 
 
 Special Thanks:
 Tyler Cook - background music from "Robopop" off his album "Electrock Retrospective, Volume 1: Dance Party"
