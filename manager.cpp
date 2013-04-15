@@ -178,7 +178,9 @@ void Manager::draw() const {
     viewport.draw();
   }
   io.printDamage(player.getDamage(),70,400);
+  io.printMessageAt("Mario:",70,380);
   io.printDamage(player2.getDamage(),520,400);
+  io.printMessageAt("Luigi:",520,380);
 }
 
 void Manager::play() {
@@ -337,7 +339,6 @@ void Manager::play() {
       if (!keyCatch) {
       	keyCatch = true;
        	player.jump();
-	cout<<"Jumped -- "<<endl;
       }
     }
     
@@ -360,14 +361,12 @@ void Manager::play() {
                 playerPickup = false;
                 it = sprites.erase(it);
                 continue;
-                std::cout << "player pickup collision" << std::endl;
             }
             if(player2Pickup && player2.collideWith((*it))) {
                 player2.setItem(item);
                 player2Pickup = false;
                 it = sprites.erase(it);
                 continue;
-                std::cout << "player 2 pickup collision" << std::endl;
             }
         }
       }
