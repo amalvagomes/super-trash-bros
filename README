@@ -10,6 +10,8 @@ Accomplished:
  * An item being held by a player can be thrown via the '/' key or the 'q' key, respectively.
  * Added Sprint feature so that both players can sprint on pressing the 'e' key or the 'RSHIFT' key.
  * Added Sound Module with a background soundtrack.
+ * Added Exploding sprites for destruction of a sprite animation
+ * Swapped Manager from an std::vector<Drawable*> to an std::list<Drawable*>
 Extras:
  * Added a different player with separate controls (Total 2 players).
  * Damage monitors now display on the HUD.
@@ -19,6 +21,7 @@ Did Not Accomplish:
 XML Schema Change Log:
 itemCount - The number of pokeballs that spawn
 itemInterval - The amount of time between pokeballs falling from the top
+dyingCrow - We stole your animation.  We'll get another soon -- we promise!
 
 Special Thanks:
 Tyler Cook - background music from "Robopop" off his album "Electrock Retrospective, Volume 1: Dance Party"
