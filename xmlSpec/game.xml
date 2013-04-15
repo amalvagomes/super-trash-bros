@@ -16,7 +16,7 @@
 <caption>Seeing possible future characters</caption>
 <messageY>10</messageY>
 
-<helpText>Press t to track a different object, F2 to track the player</helpText>
+<helpText>Press F2 to track Mario and F3 to track Luigi</helpText>
 <helpY>50</helpY>
 
 <font name="font">
