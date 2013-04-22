@@ -14,10 +14,10 @@ Manager::~Manager() {
     it++;
   }
 
-for (unsigned i = 0; i < playerDeathFrames.size(); ++i) {
-    delete playerDeathFrames[i];
+for (unsigned i = 0; i < pokemonFrames.size(); ++i) {
+    delete pokemonFrames[i];
   }
-  SDL_FreeSurface(deathSurface);
+  SDL_FreeSurface(pokemonSurface);
   SDL_FreeSurface(screen);
   SDL_FreeSurface(midbackSurface);
   delete midbackFrame;
@@ -84,7 +84,8 @@ Manager::Manager() :
   ),
   foreWorld( foreFrame, gdata->getXmlFloat("boardwalkScale"), 2.0 ),
   viewport( Viewport::getInstance() ),
-  deathSurface( io.loadAndSet(gdata->getXmlStr("dyingcrowFile"),true) ),
+  pokemonSurface( io.loadAndSet(gdata->getXmlStr("pokemonFile"),
+		gdata->getXmlBool("pokemonTransparency")) ),
   player(std::string("mario")),
   player2(std::string("yoshi")),
   playerPickup(false),
@@ -94,7 +95,7 @@ Manager::Manager() :
   itemTime(0),
   displayHelpText(false),
   sprites(),
-  playerDeathFrames(),
+  pokemonFrames(),
   TICK_INTERVAL( gdata->getXmlInt("tickInterval") ),
   nextTime(clock.getTicks()+TICK_INTERVAL)
 {
@@ -104,26 +105,24 @@ Manager::Manager() :
   atexit(SDL_Quit);
   // We now reserve space for the sprites; thus, obviating 
   // a lot of copies, reallocations, and deletions:
-
   makeItems();
-  makeDeath();
+  makePokemon();
   sprites.sort(DrawableComparator());
   viewport.setObjectToTrack(player.getSprite());
   clock.pause();
-  
 }
 
-void Manager::makeDeath() {
-  unsigned numberOfFrames = gdata->getXmlInt("dyingcrowFrames");
-  Uint16 pwidth = gdata->getXmlInt("dyingcrowWidth");
-  Uint16 pheight = gdata->getXmlInt("dyingcrowHeight");
-  Uint16 srcX = gdata->getXmlInt("dyingcrowSrcX");
-  Uint16 srcY = gdata->getXmlInt("dyingcrowSrcY");
+void Manager::makePokemon() {
+  unsigned numberOfFrames = gdata->getXmlInt("pokemonFrames");
+  Uint16 pwidth = gdata->getXmlInt("pokemonWidth");
+  Uint16 pheight = gdata->getXmlInt("pokemonHeight");
+  Uint16 srcX = gdata->getXmlInt("pokemonSrcX");
+  Uint16 srcY = gdata->getXmlInt("pokemonSrcY");
 
   for (unsigned i = 0; i < numberOfFrames; ++i) {
     unsigned frameX = i * pwidth + srcX;
-    playerDeathFrames.push_back( 
-      new Frame(deathSurface, pwidth, pheight, frameX, srcY) );
+    pokemonFrames.push_back( 
+      new Frame(pokemonSurface, pwidth, pheight, frameX, srcY) );
   }
 }
 
@@ -133,8 +132,15 @@ void Manager::makeItems() {
     float scale;
     std::cout << "Adding pokeball" << std::endl;
     std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
-    sprites.push_back( new Item("pokeball", frames, scale));
+    sprites.push_back( new Item("pokeball", frames, 0.97));
   }
+}
+
+void Manager::makeNewItem(){
+    FrameFactory& frameFact = FrameFactory::getInstance();
+    float scale;
+    std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
+    sprites.push_back(new Item("pokeball", frames, 0.97));
 }
 
 void Manager::setNumberOfItems(int number) {
@@ -166,7 +172,7 @@ void Manager::draw() const {
   bool foreWorldDrawn = false;
   bool playerDrawn = false;
   bool player2Drawn = false;
-  
+
   std::list<Drawable*>::const_iterator it = sprites.begin();
   while(it != sprites.end()) {
     if(!backWorldDrawn && (*it)->getScale() > backWorld.getScale()) {
@@ -265,7 +271,7 @@ void Manager::play() {
 	case SDLK_k      : {
           if (!keyCatch) {
             keyCatch = true;
-            killPlayer();
+            killPokeball();
           }
           break;
         }
@@ -419,18 +425,16 @@ void Manager::play() {
         }
       }
       if(dynamic_cast<PlayerDeath*>(*it) && static_cast<PlayerDeath*>(*it)->isDead()){
-	FrameFactory& frameFact = FrameFactory::getInstance();
-	float scale;
-	std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
-	sprites.push_back( new Item("pokeball", frames, scale));
-	sprites.sort(DrawableComparator());
+	makeNewItem();
 	it = sprites.erase(it);
+	sprites.sort(DrawableComparator());
 	continue;
       }
 
       (*it)->update(ticks);
       it++;
     }
+
     if(player.collideWith(player2.getSprite())) {
       if(player.getSprite()->X() > player2.getSprite()->X()) {
         float x1 = player.getSprite()->X();
@@ -471,20 +475,19 @@ Uint32 Manager::timeLeft() {
   return (nextTime <= now)?0:(nextTime - now);
 }
 
-void Manager::killPlayer() {
+void Manager::killPokeball() {
     std::list<Drawable*>::iterator it = sprites.begin();
     while (it != sprites.end()) {
       Drawable* sprite (dynamic_cast<Item*>(*it));
       if(sprite)
       {
-          MultiframeSprite *tmp = new PlayerDeath(std::string("dyingcrow"),playerDeathFrames);
+          MultiframeSprite *tmp = new PlayerDeath(std::string("pokemon"),pokemonFrames);
           tmp->setPosition(sprite->getPosition());
-	sprite = tmp;
+	  sprite = tmp;
 	  sprites.push_back(sprite);
    	  it = sprites.erase(it);
 	  return;
       }
       else it++;
     }
-    return;
 }

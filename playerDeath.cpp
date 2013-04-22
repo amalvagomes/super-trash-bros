@@ -21,7 +21,7 @@ PlayerDeath(const std::string& name, const std::vector<Frame*>& fm) :
   MultiframeSprite(name, fm, 1.0),
   dead(false),
   timeSinceLastFrame( 0 ),
-  deathInterval(Gamedata::getInstance()->getXmlInt(name+"FrameInterval"))
+  deathInterval(Gamedata::getInstance()->getXmlInt(name+"DeadAfter")*1000)
 { }
 
 PlayerDeath::PlayerDeath(const PlayerDeath& s) :
@@ -38,10 +38,15 @@ PlayerDeath& PlayerDeath::operator=(const PlayerDeath& rhs) {
   return *this;
 }
 
-void PlayerDeath::update(Uint32 ticks) { 
-  if ( Y() + frameHeight  < worldHeight ) {
+void PlayerDeath::update(Uint32 ticks) {
+  if(timeSinceLastFrame < deathInterval){
+    if ( Y() + frameHeight  >= worldHeight ){
+	velocityX(0);
+	velocityY(0);
+    }
+    timeSinceLastFrame += ticks;
     MultiframeSprite::update(ticks);
-    advanceFrame(ticks);
+
   }
   else {
       dead = true;
