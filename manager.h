@@ -19,6 +19,7 @@ public:
   Manager ();
   ~Manager ();
   void play();
+  void setNumberOfItems(int);
 
 private:
   const bool env;
