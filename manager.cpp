@@ -104,10 +104,13 @@ Manager::Manager() :
   atexit(SDL_Quit);
   // We now reserve space for the sprites; thus, obviating 
   // a lot of copies, reallocations, and deletions:
+
   makeItems();
   makeDeath();
   sprites.sort(DrawableComparator());
   viewport.setObjectToTrack(player.getSprite());
+  clock.pause();
+  
 }
 
 void Manager::makeDeath() {
@@ -131,6 +134,27 @@ void Manager::makeItems() {
     std::cout << "Adding pokeball" << std::endl;
     std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
     sprites.push_back( new Item("pokeball", frames, scale));
+  }
+}
+
+void Manager::setNumberOfItems(int number) {
+  FrameFactory& frameFact = FrameFactory::getInstance();
+  int numberOfPokeballs=gdata->getXmlInt("itemCount");
+  if ( number > numberOfPokeballs ) {
+    number = number - numberOfPokeballs;
+    for (int i = 0; i < number; ++i) {
+	float scale;
+    	std::cout << "Adding pokeball" << std::endl;
+   	std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
+    	sprites.push_back( new Item("pokeball", frames, scale));
+    }
+  }
+  else {
+    number = numberOfPokeballs - number;
+    for (int i = 0; i < number; ++i) {
+      delete sprites.back();
+      sprites.pop_back();
+    }
   }
 }
 
@@ -207,6 +231,7 @@ void Manager::draw() const {
 }
 
 void Manager::play() {
+  clock.unpause();
   SDL_Event* event = new SDL_Event();
   SDLSound sound;
   bool done = false;
@@ -228,7 +253,7 @@ void Manager::play() {
     }
     if(event->type == SDL_KEYDOWN) {
       switch ( event->key.keysym.sym ) {
-        case SDLK_ESCAPE : done = true; break;
+        case SDLK_ESCAPE : clock.pause(); done = true; break;
         case SDLK_p      : {
           if (!keyCatch) {
             keyCatch = true;

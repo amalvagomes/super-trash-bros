@@ -20,7 +20,7 @@
 <helpY>50</helpY>
 
 <font name="font">
-  <fontFile>font/dyslexic-bold.otf</fontFile>
+  <fontFile>font/pirulen.ttf</fontFile>
   <fontSize>14</fontSize>
   <fontRed>0</fontRed>
   <fontGreen>0</fontGreen>
@@ -39,6 +39,12 @@
   <backSpeed backSpeedX="0" backSpeedY="0"/>
   <backTransparency>false</backTransparency>
   <backScale>0.0</backScale>
+</back>
+
+<back>
+  <backRed>0</backRed>
+  <backGreen>0</backGreen>
+  <backBlue>0</backBlue>
 </back>
 
 <mid>
