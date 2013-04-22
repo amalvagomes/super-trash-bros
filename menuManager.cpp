@@ -29,7 +29,7 @@ void MenuManager::drawBackground() const {
 
 void MenuManager::getNumberOfItems() {
   IOManager& io = IOManager::getInstance().getInstance();
-SDL_Event* event ;
+SDL_Event* event = new SDL_Event();
 //  SDL_Event event;
   bool done = false;
   bool nameDone = false;
@@ -73,7 +73,7 @@ SDL_Event* event ;
 
 void MenuManager::play() {
   bool keyCatch = false; // To get only 1 key per keydown
-  SDL_Event event;
+  SDL_Event* event = new SDL_Event();
   bool done = false;
   // Here, we need to create an instance of the Manager,
   // the one that manages the game:
@@ -85,10 +85,10 @@ void MenuManager::play() {
     menu.draw();
     SDL_Flip(screen);
 
-    SDL_PollEvent(&event);
-    if (event.type ==  SDL_QUIT) { break; }
-    if(event.type == SDL_KEYDOWN) {
-      switch ( event.key.keysym.sym ) {
+    SDL_PollEvent(event);
+    if (event->type ==  SDL_QUIT) { break; }
+    if(event->type == SDL_KEYDOWN) {
+      switch ( event->key.keysym.sym ) {
         case SDLK_ESCAPE :
         case SDLK_q : {
           done = true;
@@ -137,7 +137,7 @@ void MenuManager::play() {
       }
       keyCatch = true;
     }
-    if(event.type == SDL_KEYUP) { 
+    if(event->type == SDL_KEYUP) { 
       keyCatch = false; 
       menu.lightOff();
     }

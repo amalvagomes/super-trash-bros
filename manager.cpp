@@ -108,8 +108,8 @@ Manager::Manager() :
   makeItems();
   makeDeath();
   sprites.sort(DrawableComparator());
-  clock.pause();
   viewport.setObjectToTrack(player.getSprite());
+  clock.pause();
   
 }
 
