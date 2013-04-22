@@ -25,6 +25,10 @@ public:
   { parseXML(); }
   virtual ~ParseXML() { XML_ParserFree(parser); }
 
+  float getXmlFloat(const string&) const;
+  int getXmlInt(const string&) const;
+  const string& getXmlStr(const string&) const;
+
   const map<string, string> getXmlData() const { return xmlData; }
 
   static void wrapper4Start(void *data, const char *el, const char **attr);
