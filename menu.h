@@ -3,6 +3,7 @@
 #include "frame.h"
 #include "ioManager.h"
 #include "vector2f.h"
+#include "viewport.h"
 
 class Menu {
 public:
@@ -25,6 +26,7 @@ private:
   ParseXML parser;
   SDL_Surface* surfaceOff;
   SDL_Surface* surfaceOn;
+  Viewport& viewport;
   std::vector<Frame> clicks;
   unsigned nextIcon;
   unsigned click;
