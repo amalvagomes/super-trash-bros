@@ -29,8 +29,7 @@ void MenuManager::drawBackground() const {
 
 void MenuManager::getNumberOfItems() {
   IOManager& io = IOManager::getInstance().getInstance();
-SDL_Event* event = new SDL_Event();
-//  SDL_Event event;
+  SDL_Event* event = new SDL_Event();
   bool done = false;
   bool nameDone = false;
   const string msg("How many Pokeballs: ");
@@ -97,7 +96,7 @@ void MenuManager::play() {
         case SDLK_RETURN : {
           if ( !keyCatch ) {
             menu.lightOn();
-            if ( menu.getIconClicked() == "Start Game" ) {
+            if ( menu.getIconClicked() == "Start Game") {
               // Here is where we call the play() function in Manager:
               manager.play();
               std::cout << "Starting game ..." << std::endl;
