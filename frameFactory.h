@@ -1,3 +1,5 @@
+#ifndef FRAME_FACTORY
+#define FRAME_FACTORY
 #include <string>
 #include <vector>
 #include <map>
@@ -32,3 +34,4 @@ private:
     return min + (rand() / (std::numeric_limits<int>::max()+1.0f))*(max-min);
   }
 };
+#endif

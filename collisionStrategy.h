@@ -1,3 +1,5 @@
+#ifndef COLLISION_STRATEGY
+#define COLLISION_STRATEGY
 #include <cmath>
 #include "sprite.h"
 
@@ -29,3 +31,4 @@ public:
   virtual bool execute(const Drawable&, const Drawable&) const;
   virtual void draw() const;
 };
+#endif

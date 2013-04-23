@@ -13,6 +13,7 @@
 #include "world.h"
 #include "viewport.h"
 #include "player.h"
+#include "smartPlayer.h"
 
 class Manager {
 public:
@@ -50,7 +51,7 @@ private:
 
 
   Player player;
-  Player player2;
+  SmartPlayer player2;
   bool playerPickup;
   bool player2Pickup;
 

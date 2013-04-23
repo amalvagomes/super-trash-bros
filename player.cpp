@@ -9,8 +9,25 @@ Player::~Player() {
   delete sprite;
   delete cStrat;
 }
+Player::Player(const Player& rhs) :
+  sprite( rhs.sprite ),
+  gdata( Gamedata::getInstance() ),
+  keyPressed( rhs.keyPressed ),
+  worldWidth( rhs.worldWidth ), 
+  worldHeight( rhs.worldHeight ), 
+  initialVelocity( rhs.initialVelocity ), 
+  width( rhs.width ), 
+  height( rhs.height ),
+  damage( rhs.damage ),
+  cStrat( rhs.cStrat ),
+  item( rhs.item ),
+  frames( rhs.frames ),
+  framesLeft(rhs.framesLeft),
+  name(rhs.name)
+{ }
 
 Player::Player(const string& n) :
+  sprite( NULL ),
   gdata( Gamedata::getInstance() ),
   keyPressed(false),
   worldWidth( gdata->getXmlInt("worldWidth") ), 
@@ -25,7 +42,6 @@ Player::Player(const string& n) :
   item( NULL ),
   frames(),
   framesLeft(),
-  sprite( NULL ),
   name(n)
 { 
   makeSprite();

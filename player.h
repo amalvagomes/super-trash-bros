@@ -1,3 +1,5 @@
+#ifndef PLAYER
+#define PLAYER
 #include "gamedata.h"
 #include "frameFactory.h"
 #include "twowayMultisprite.h"
@@ -28,6 +30,10 @@ public:
   void rightaccelerate();
   void jump();
 
+protected: 
+  TwowayMultiframeSprite* sprite;
+  Player(const Player&);
+
 private:
   const Gamedata* gdata;
   bool keyPressed;
@@ -41,11 +47,9 @@ private:
   Item* item;
   std::vector<Frame*> frames;
   std::vector<Frame*> framesLeft;
-  TwowayMultiframeSprite* sprite;
   std::string name;
   void makeSprite();
-  Player(const Player&);
   Player& operator=(const Player&);
 };
 
-
+#endif

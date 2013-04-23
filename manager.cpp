@@ -87,7 +87,7 @@ Manager::Manager() :
   pokemonSurface( io.loadAndSet(gdata->getXmlStr("pokemonFile"),
 		gdata->getXmlBool("pokemonTransparency")) ),
   player(std::string("mario")),
-  player2(std::string("yoshi")),
+  player2(std::string("yoshi"), player, 120.0),
   playerPickup(false),
   player2Pickup(false),
   currentStar(0),
