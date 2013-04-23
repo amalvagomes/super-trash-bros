@@ -15,6 +15,7 @@ Menu::Menu() :
   parser( "xmlSpec/menu.xml" ),
   surfaceOff(io.loadAndSet( parser.getXmlStr("clickoffFile"), true)),
   surfaceOn(io.loadAndSet( parser.getXmlStr("clickonFile"), true)),
+  viewport( Viewport::getInstance() ),
   clicks(),
   nextIcon(0),
   click(0) 
@@ -57,7 +58,7 @@ void Menu::draw() const {
     y += space[1];
   }
   y = position[1] + nextIcon*space[1];
-  clicks[click].draw(position[0]-space[0], y);
+  clicks[click].draw(viewport.X()+position[0]-space[0], y);
 }
 
 const string& Menu::getIconClicked() const { 
