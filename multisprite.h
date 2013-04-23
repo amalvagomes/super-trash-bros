@@ -17,6 +17,8 @@ public:
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   unsigned getPixel(Uint32, Uint32) const;
+  int getFrameHeight() { return frameHeight;}
+  int getWorldHeight() { return worldHeight;}
 
 protected:
   unsigned currentFrame;

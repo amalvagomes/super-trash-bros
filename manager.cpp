@@ -268,13 +268,6 @@ void Manager::play() {
           }
           break;
         }
-	case SDLK_k      : {
-          if (!keyCatch) {
-            keyCatch = true;
-            killPokeball();
-          }
-          break;
-        }
         case SDLK_F1     : {
           if (!keyCatch) {
             keyCatch = true;
@@ -401,7 +394,7 @@ void Manager::play() {
     std::list<Drawable*>::iterator it = sprites.begin();
     while (it != sprites.end()) {
       Item* item = dynamic_cast<Item*>(*it);
-      if(item != 0) { 
+      if(item != 0) {
         if(!item->isReleased()) { 
           if(++itemTime == itemTimer) {
             item->X((int)getRand(0.0,640.0));
@@ -411,26 +404,53 @@ void Manager::play() {
           }
         } else {
             if(playerPickup && player.collideWith((*it))) {
+		item->setLastTouched(1);
                 player.setItem(item);
                 playerPickup = false;
                 it = sprites.erase(it);
                 continue;
             }
             if(player2Pickup && player2.collideWith((*it))) {
+		item->setLastTouched(2);
                 player2.setItem(item);
                 player2Pickup = false;
                 it = sprites.erase(it);
                 continue;
             }
+	    if(player.collideWith(*it) && (item->getLastTouched() == 2)){
+		it = killPokeball(it);
+		continue;
+	    }
+	    if(player2.collideWith(*it) && (item->getLastTouched() == 1)){
+		it = killPokeball(it);
+		continue;
+	    }
         }
       }
-      if(dynamic_cast<PlayerDeath*>(*it) && static_cast<PlayerDeath*>(*it)->isDead()){
-	makeNewItem();
-	it = sprites.erase(it);
-	sprites.sort(DrawableComparator());
-	continue;
-      }
+      if(dynamic_cast<PlayerDeath*>(*it)){
+	if(static_cast<PlayerDeath*>(*it)->isDead()){
+	  makeNewItem();
+	  it = sprites.erase(it);
+	  sprites.sort(DrawableComparator());
+	  continue;
+        }
 
+        if(player.collideWith(*it)){
+	  player.damageIncr(.1);
+	  float veloc = player.getSprite()->velocityX();
+	  if(veloc == 0)
+		veloc = 1000;
+	  const_cast<Drawable*>(player.getSprite())->velocityX(veloc+(veloc*(player.getDamage()/50.0)));
+        }
+
+        if(player2.collideWith(*it)){
+	  player2.damageIncr(.1);
+	  float veloc = player2.getSprite()->velocityX();
+	  if(veloc == 0)
+		veloc = 1000;
+	  const_cast<Drawable*>(player2.getSprite())->velocityX(veloc+(veloc*(player2.getDamage()/50.0)));
+        }
+      }
       (*it)->update(ticks);
       it++;
     }
@@ -475,19 +495,13 @@ Uint32 Manager::timeLeft() {
   return (nextTime <= now)?0:(nextTime - now);
 }
 
-void Manager::killPokeball() {
-    std::list<Drawable*>::iterator it = sprites.begin();
-    while (it != sprites.end()) {
+std::list<Drawable*>::iterator Manager::killPokeball(std::list<Drawable*>::iterator it) {
       Drawable* sprite (dynamic_cast<Item*>(*it));
-      if(sprite)
-      {
           MultiframeSprite *tmp = new PlayerDeath(std::string("pokemon"),pokemonFrames);
           tmp->setPosition(sprite->getPosition());
+	  if(tmp->Y() + tmp->getFrameHeight() > tmp->getWorldHeight())
+		tmp->Y(tmp->getWorldHeight()-tmp->getFrameHeight());
 	  sprite = tmp;
 	  sprites.push_back(sprite);
-   	  it = sprites.erase(it);
-	  return;
-      }
-      else it++;
-    }
+   	  return it = sprites.erase(it);
 }

@@ -72,7 +72,7 @@ private:
 
   void makeItems();
   void makePokemon();
-  void killPokeball();
+  std::list<Drawable*>::iterator killPokeball(std::list<Drawable*>::iterator);
   void makeNewItem();
 
   float getRand(float min, float max) {

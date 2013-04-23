@@ -38,6 +38,7 @@ Item::Item( const std::string& name,
   animated( false ),
   stopped( true ),
   released( false ),
+  lastTouched(0),
   frames(fms),
   dt(0),
   frameInterval( Gamedata::getInstance()->getXmlInt(name+"FrameInterval") )
@@ -54,6 +55,7 @@ Item::Item(const Item& s) :
   animated( s.animated ),
   stopped( s.stopped ),
   released( s.released ),
+  lastTouched(s.lastTouched),
   frames(s.frames),
   dt(s.dt),
   frameInterval( s.frameInterval )

@@ -24,6 +24,8 @@ public:
   bool isStopped() { return stopped; }
   bool isAnimated() { return animated; }
   unsigned getPixel(Uint32, Uint32) const;
+  int getLastTouched() { return lastTouched; }
+  void setLastTouched(int x) { lastTouched = x; }
 
 protected:
   unsigned currentFrame;
@@ -35,6 +37,7 @@ protected:
   bool animated;
   bool stopped;
   bool released;
+  int lastTouched;
 
 private:
   const std::vector<Frame *> frames;
