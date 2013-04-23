@@ -58,7 +58,7 @@ void Menu::draw() const {
     y += space[1];
   }
   y = position[1] + nextIcon*space[1];
-  clicks[click].draw(viewport.X()+position[0]-space[0], y);
+  clicks[click].draw(viewport.X()+position[0]-space[0]+10, y-13);
 }
 
 const string& Menu::getIconClicked() const { 

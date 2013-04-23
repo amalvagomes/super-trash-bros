@@ -21,7 +21,7 @@
 
 <font name="font">
   <fontFile>font/dyslexic-bold.otf</fontFile>
-  <fontSize>14</fontSize>
+  <fontSize>18</fontSize>
   <fontRed>0</fontRed>
   <fontGreen>0</fontGreen>
   <fontBlue>255</fontBlue>
