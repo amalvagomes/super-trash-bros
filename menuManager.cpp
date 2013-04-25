@@ -49,7 +49,7 @@ void MenuManager::getNumberOfItems() {
       }
     }
     drawBackground();
-    io.printStringAfterMessage(msg, 20, 120);
+    io.printStringAfterMessage(msg, 20, 200);
     if ( nameDone ) {
       std::string number = io.getString();
       std::stringstream strm;
@@ -59,7 +59,7 @@ void MenuManager::getNumberOfItems() {
       strm.str(std::string()); // clear contents
       strm << "Okay -- you'll see " << numberOfOrbs << " pokeballs";
 //      cout << strm.str() << endl;
-      io.printMessageAt(strm.str(), 20, 160);
+      io.printMessageAt(strm.str(), 20, 240);
       SDL_Flip(screen);
       SDL_Delay(1000);
       done = true;
@@ -92,7 +92,7 @@ void MenuManager::getSoundOptions() {
       }
     }
     drawBackground();
-    io.printStringAfterMessage(msg, 20, 220);
+    io.printStringAfterMessage(msg, 20, 200);
     if ( nameDone ) {
       std::string answer = io.getString();
       std::stringstream strm;
@@ -106,7 +106,7 @@ void MenuManager::getSoundOptions() {
         strm << "That response doesn't look like an 'on' or 'off'...";
         soundEnabled = true;
       }
-      io.printMessageAt(strm.str(), 20, 260);
+      io.printMessageAt(strm.str(), 20, 240);
       SDL_Flip(screen);
       SDL_Delay(1000);
       done = true;
@@ -122,7 +122,6 @@ void MenuManager::displayHelp() {
   SDL_Event* event = new SDL_Event();
   bool done = false;
 //  bool nameDone = false;
-  const string msg("----------------------- HELP MENU -----------------------");
   io.clearString();
   while ( not done ) {
     Uint8 *keystate = SDL_GetKeyState(NULL);
@@ -136,26 +135,23 @@ void MenuManager::displayHelp() {
       }
     }
     drawBackground();
-//    io.printStringAfterMessage(msg, 20, 120);
-      io.printMessageCenteredAt(msg, 50);
-    
-      io.printMessageCenteredAt("Press p to pause game", 90);
-      io.printMessageCenteredAt("Press ESC to return to menu", 110);
-      io.printMessageCenteredAt("Press F1 to see in game help", 130);
+      io.printMessageCenteredAt("Press p to pause game", 150);
+      io.printMessageCenteredAt("Press ESC to return to menu", 170);
+      io.printMessageCenteredAt("Press F1 to see in game help", 190);
 
-      io.printMessageAt("MARIO CONTROLS", 375, 180);
-      io.printMessageAt("Left: LEFT arrow ", 375, 220);
-      io.printMessageAt("Right: RIGHT arrow", 375, 240);
-      io.printMessageAt("Jump: UP arrow ", 375, 260);
-      io.printMessageAt("Sprint: RSHIFT", 375, 280);
-      io.printMessageAt("Pick/Throw Item: /", 375, 300);
+      io.printMessageAt("MARIO CONTROLS", 375, 230);
+      io.printMessageAt("Left: LEFT arrow ", 375, 270);
+      io.printMessageAt("Right: RIGHT arrow", 375, 290);
+      io.printMessageAt("Jump: UP arrow ", 375, 310);
+      io.printMessageAt("Sprint: RSHIFT", 375, 330);
+      io.printMessageAt("Pick/Throw Item: /", 375, 350);
 
-      io.printMessageAt("LUIGI CONTROLS", 75, 180);
-      io.printMessageAt("Left: a ", 75, 220);
-      io.printMessageAt("Right: d", 75, 240);
-      io.printMessageAt("Jump: w ", 75, 260);
-      io.printMessageAt("Sprint: e", 75, 280);
-      io.printMessageAt("Pick/Throw Item: q", 75, 300);
+      io.printMessageAt("LUIGI CONTROLS", 75, 230);
+      io.printMessageAt("Left: a ", 75, 270);
+      io.printMessageAt("Right: d", 75, 290);
+      io.printMessageAt("Jump: w ", 75, 310);
+      io.printMessageAt("Sprint: e", 75, 330);
+      io.printMessageAt("Pick/Throw Item: q", 75, 350);
 
     if ( !done ) {
       SDL_Flip(screen);
