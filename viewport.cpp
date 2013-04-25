@@ -31,7 +31,7 @@ void Viewport::draw() const {
   bg.x = 10;
   bg.y = 5;
   bg.w = 620;
-  bg.h = 130;
+  bg.h = 210;
   SDL_FillRect(io.getScreen(), &bg, SDL_MapRGBA(io.getScreen()->format, 100,100,100,70));
   io.printMessageCenteredAt(
     gdata->getXmlStr("caption"),
@@ -40,11 +40,20 @@ void Viewport::draw() const {
     gdata->getXmlStr("helpText"),
     gdata->getXmlInt("helpY"));
   io.printMessageCenteredAt("Tracking "+objectToTrack->getName(), 30);
-//  io.printMessageCenteredAt("Move Mario using arrow keys", 70);
-  io.printMessageCenteredAt("Mario:  Move using arrow keys | Pick/Shoot Pokeball using / | Sprint using RSHIFT", 70);
-//  io.printMessageCenteredAt("Move Luigi using a s d w keys", 110);
-  io.printMessageCenteredAt("Luigi:  Move using a s d w keys | Pick/Shoot Pokeball using q | Sprint using e", 90);
-  io.printMessageCenteredAt("Press 'k' to destroy the pokeball", 110);
+  io.printMessageCenteredAt("Press ESC to go back to menu", 70);
+  
+  io.printMessageAt("Luigi", 475, 110);
+  io.printMessageAt("Move: a d", 400, 130);
+  io.printMessageAt("Jump: w", 400, 150);
+  io.printMessageAt("Pick/Shoot Pokeball: q", 400, 170);
+  io.printMessageAt("Sprint: e", 400, 190);
+
+  io.printMessageAt("Mario", 100, 110);
+  io.printMessageAt("Move: Left/Right arrow keys", 50, 130);
+  io.printMessageAt("Jump: Up arrow key", 50, 150);
+  io.printMessageAt("Pick/Shoot Pokeball: /", 50, 170);
+  io.printMessageAt("Sprint: RSHIFT", 50, 190);
+//  io.printMessageCenteredAt("Luigi:  Move using a d w keys | Pick/Shoot Pokeball using q | Sprint using e", 90);
   Clock& clock = Clock::getInstance();
   io.printMessageValueAt("FPS: ",clock.getFps(), 15, 7);
 }
