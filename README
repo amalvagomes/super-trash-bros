@@ -5,15 +5,16 @@ Project #5
 
 Accomplished:
  * Added menu system to allow changing of parameters (number of pokeballs), help, etc.
- * Added damage pokeballs which explode into Charzard upon impact after thrown at players.
- * Added AI to the second player. When within a certain distance, it will attack and follow for a small
-	 amount of time
- * Added a jump feature and removed up and down movement.
+ * Added sound when toggling through the menu buttons. 
+ * Added damaging pokeballs that transform into Charzard upon impact after thrown at players.
+ * Added AI to the second player (Luigi) . When within a certain distance, it will attack and keep following for some time.
+ * Added jump feature for the players and removed up and down movement.
+ * Added a conclusion so that either of the players win. The user can then start a new game or quit.
+ * Cleaned up the code.
  * No memory Leaks.
 Extras:
- * AI player can be over ridden by using w,a,s,d,e,q as it controls (Total 2 players).
- * If a player goes outside the viewport, indicators show where the player is based on distance to
-	 viewport.
+ * AI player can be over ridden by using w,a,d,e,q which are the controls for the second player. (Total 2 players).
+ * If a player goes outside the viewport, indicators show where the player is based on distance to the viewport. In other words, the indicators help to see how far the players have gone in the world. 
 
 Did Not Accomplish:
 
