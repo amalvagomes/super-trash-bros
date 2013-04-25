@@ -1,28 +1,23 @@
 Ethan Black, Nitin Madhok, and Antonio MalvaGomes
-ethanb@g.clemson.edu, nmadhok@g.clemson.edu, amalvag@g.clemson.edu
-April 15th, 2013
-Project #4
+ethanb@clemson.edu, nmadhok@g.clemson.edu, amalvag@g.clemson.edu
+April 25th, 2013
+Project #5
 
 Accomplished:
- * Added collisions between players via CollisionStrategy and per-pixel collisions.
- * Added damage to players on collisions with other players.
- * Items fall from the top of the game and can be picked up via the '/' or the 'q' keys respectively.
- * An item being held by a player can be thrown via the '/' key or the 'q' key, respectively.
- * Added Sprint feature so that both players can sprint on pressing the 'e' key or the 'RSHIFT' key.
- * Added Sound Module with a background soundtrack.
- * Added Exploding sprites for destruction of a sprite animation
- * Swapped Manager from an std::vector<Drawable*> to an std::list<Drawable*>
+ * Added menu system to allow changing of parameters (number of pokeballs), help, etc.
+ * Added damage pokeballs which explode into Charzard upon impact after thrown at players.
+ * Added AI to the second player. When within a certain distance, it will attack and follow for a small
+	 amount of time
+ * Added a jump feature and removed up and down movement.
+ * No memory Leaks.
 Extras:
- * Added a different player with separate controls (Total 2 players).
- * Damage monitors now display on the HUD.
+ * AI player can be over ridden by using w,a,s,d,e,q as it controls (Total 2 players).
+ * If a player goes outside the viewport, indicators show where the player is based on distance to
+	 viewport.
 
 Did Not Accomplish:
 
 XML Schema Change Log:
-itemCount - The number of pokeballs that spawn
-itemInterval - The amount of time between pokeballs falling from the top
-dyingCrow - We stole your animation.  We'll get another soon -- we promise!
-Memory Leaks? 
 
 Special Thanks:
 Tyler Cook - background music from "Robopop" off his album "Electrock Retrospective, Volume 1: Dance Party"
