@@ -61,7 +61,7 @@ Menu::Menu() :
 void Menu::draw() const {
   int x = position[0];
   int y = position[1];
-  background->draw(viewport.X(), viewport.Y(), 0, 0); 
+  background->draw(viewport.X(), viewport.Y()); 
   for (unsigned i = 0; i < words.size(); ++i) {
     io.printMessageAt(words[i], x, y);
     y += space[1];

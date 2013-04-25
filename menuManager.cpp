@@ -188,4 +188,5 @@ void MenuManager::play() {
       menu.lightOff();
     }
   }
+  delete event;
 }
