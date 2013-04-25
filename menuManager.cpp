@@ -188,7 +188,7 @@ void MenuManager::play() {
           done = true;
           break;
         }
-        case SDLK_RETURN : {
+        case SDLK_RETURN: case SDLK_RIGHT: {
           if ( !keyCatch ) {
             menu.lightOn();
             if ( menu.getIconClicked() == "Start Game") {

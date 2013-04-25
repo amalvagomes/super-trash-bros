@@ -66,6 +66,7 @@ void Menu::draw() const {
   int x = position[0];
   int y = position[1];
   this->drawBG();
+  //io.printMessageCenteredAt("================ MAIN MENU ================",60);
   for (unsigned i = 0; i < words.size(); ++i) {
     io.printMessageAt(words[i], x, y);
     y += space[1];
