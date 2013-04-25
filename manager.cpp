@@ -514,13 +514,26 @@ void Manager::play() {
                 continue;
             }
 	    if(player.collideWith(*it) && (item->getLastTouched() == 2)){
+		float veloc;
+	        player.damageIncr(10.0);
+		if(player.getSprite()->velocityX() < 0)
+		        veloc = 30;
+		else veloc = -30;
+	        const_cast<Drawable*>(player.getSprite())->velocityX(veloc+(veloc*(player.getDamage()*0.1)));
 		it = killPokeball(it);
 		continue;
 	    }
 	    if(player2.collideWith(*it) && (item->getLastTouched() == 1)){
+		float veloc;
+	        player2.damageIncr(10.0);
+		if(player2.getSprite()->velocityX() < 0)
+		        veloc = 30;
+		else veloc = -30;
+	        const_cast<Drawable*>(player2.getSprite())->velocityX(veloc+(veloc*(player2.getDamage()*0.1)));
 		it = killPokeball(it);
 		continue;
 	    }
+
         }
       }
       if(dynamic_cast<PlayerDeath*>(*it)){
