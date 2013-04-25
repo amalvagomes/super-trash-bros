@@ -76,9 +76,6 @@ void TwowayMultiframeSprite::update(Uint32 ticks) {
   if ( Y() < 0) {
     velocityY( abs( velocityY() ) );
   }
-  if ( Y() > worldHeight-frameHeight) {
-    velocityY( -abs( velocityY() ) );
-  }
 
   if ( X() < 0) {
     velocityX( abs( velocityX() ) );

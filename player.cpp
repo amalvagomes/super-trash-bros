@@ -63,14 +63,22 @@ void Player::makeSprite() {
 }
 
 void Player::update(Uint32 ticks) { 
-  //if (!keyPressed) stop();
   keyPressed = false;
-  if(sprite->velocityY() < 0.0 || sprite->velocityY() > 0.0) {
-    sprite->velocityY(sprite->velocityY()*0.95);
+  if ( sprite->Y() < worldHeight-(sprite->getFrame()->getHeight()))
+	sprite->velocityY( sprite->velocityY() + (10 * static_cast<float>(ticks) * .1) );
+  
+  Vector2f incr = sprite->getVelocity() * static_cast<float>(ticks) * 0.001;
+  sprite->setPosition(sprite->getPosition() + incr);
+
+  if ( sprite->Y() >= worldHeight-(sprite->getFrame()->getHeight())) {
+      sprite->velocityY(0.0);
+      sprite->Y(worldHeight - (sprite->getFrame()->getHeight()));
   }
+
   if(sprite->velocityX() > 0.0 || sprite->velocityX() < 0.0) {
     sprite->velocityX(sprite->velocityX()*0.9);
   }
+
   sprite->update(ticks); 
   if(hasItem()) {
     item->stop();
@@ -103,15 +111,6 @@ void Player::left()  {
     //sprite->velocityX(-initialVelocity[0]);
   }
   keyPressed = true;
-} 
-void Player::up() { 
-  keyPressed = true;
-  if ( sprite->Y()+sprite->getFrame()->getHeight()-20 < Gamedata::getInstance()->getXmlInt(name+"MinY") ) {
-    sprite->velocityY( initialVelocity[1] );
-  }
-  else {
-    sprite->velocityY(-initialVelocity[0]);  
-  }
 } 
 void Player::down()  { 
   keyPressed = true;

@@ -24,7 +24,6 @@ public:
   void stop();
   void right();
   void left();
-  void up();
   void down();
   void leftaccelerate();
   void rightaccelerate();

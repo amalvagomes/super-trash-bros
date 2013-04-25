@@ -352,11 +352,8 @@ void Manager::play() {
     if(keystate[SDLK_LEFT]) {
        player.left();
     }
-    if(keystate[SDLK_DOWN]) {
-      player.down();
-    }
     if(keystate[SDLK_UP]) {
-      player.up();
+      player.jump();
     }
     if(keystate[SDLK_RIGHT]) {
       player.right();
@@ -370,11 +367,8 @@ void Manager::play() {
     if(keystate[SDLK_a]) {
       player2.left();
     }
-    if(keystate[SDLK_s]) {
-      player2.down();
-    }
     if(keystate[SDLK_w]) {
-      player2.up();
+      player2.jump();
     }
     if(keystate[SDLK_d]) {
       player2.right();

@@ -61,7 +61,7 @@ void SmartPlayer::update(Uint32 ticks) {
       if ( x < ex ) this->right();
       if ( x > ex ) this->left();
       if ( y < ey ) this->down();
-      if ( y > ey ) this->up();
+      if ( y > ey ) this->jump();
     }
   }
 }
