@@ -11,14 +11,16 @@ SmartPlayer::SmartPlayer(const string& n, const Player& p, float dist) :
   io(&IOManager::getInstance()), 
   enemy(p), 
   safeDistance(dist),
-  currentMode(NORMAL) { }
+  currentMode(NORMAL),
+  timeToChase(0) { }
 
 SmartPlayer::SmartPlayer(const SmartPlayer& rhs) :
   Player(rhs),
   io(rhs.io),
   enemy(rhs.enemy),
   safeDistance(rhs.safeDistance),
-  currentMode(rhs.currentMode) { }
+  currentMode(rhs.currentMode),
+  timeToChase(rhs.timeToChase) { }
 
 SmartPlayer& SmartPlayer::operator=(const SmartPlayer& rhs) {
   if ( this == &rhs ) return *this;
@@ -44,11 +46,18 @@ void SmartPlayer::update(Uint32 ticks) {
   float distanceToEnemy = ::distance( x, y, ex, ey );
 
   if  ( currentMode == NORMAL ) {
-    if(distanceToEnemy < safeDistance) currentMode = EVADE;
+    if(distanceToEnemy < safeDistance) {
+      currentMode = EVADE;
+      timeToChase = 1000;
+    }
   }
   else if  ( currentMode == EVADE ) {
-    if(distanceToEnemy > safeDistance) currentMode=NORMAL;
-    else {
+    if(distanceToEnemy > safeDistance || timeToChase<0) {
+      currentMode=NORMAL;
+      sprite->velocityX((-1.0)*sprite->velocityX());
+      sprite->velocityY((-1.0)*sprite->velocityY());
+    } else {
+      timeToChase -= ticks;
       if ( x < ex ) this->right();
       if ( x > ex ) this->left();
       if ( y < ey ) this->down();

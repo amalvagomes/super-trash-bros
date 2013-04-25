@@ -19,4 +19,5 @@ private:
   const Player& enemy;
   float safeDistance;
   MODE currentMode;
+  int timeToChase;
 };
