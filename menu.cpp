@@ -5,6 +5,8 @@
 Menu::~Menu() {
   SDL_FreeSurface(surfaceOff);
   SDL_FreeSurface(surfaceOn);
+  delete background;
+  SDL_FreeSurface(backSurface);
 }
 
 Menu::Menu() : 
@@ -15,6 +17,12 @@ Menu::Menu() :
   parser( "xmlSpec/menu.xml" ),
   surfaceOff(io.loadAndSet( parser.getXmlStr("clickoffFile"), true)),
   surfaceOn(io.loadAndSet( parser.getXmlStr("clickonFile"), true)),
+  backSurface(io.loadAndSet( parser.getXmlStr("backgroundFile"), true)),
+  background(new Frame(backSurface,
+                parser.getXmlInt("backgroundWidth"), 
+                parser.getXmlInt("backgroundHeight"), 
+                parser.getXmlInt("backgroundSrcX"), 
+                parser.getXmlInt("backgroundSrcY"))),
   viewport( Viewport::getInstance() ),
   clicks(),
   nextIcon(0),
@@ -53,6 +61,7 @@ Menu::Menu() :
 void Menu::draw() const {
   int x = position[0];
   int y = position[1];
+  background->draw(viewport.X(), viewport.Y(), 0, 0); 
   for (unsigned i = 0; i < words.size(); ++i) {
     io.printMessageAt(words[i], x, y);
     y += space[1];

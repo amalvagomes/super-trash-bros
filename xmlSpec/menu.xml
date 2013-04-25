@@ -31,4 +31,12 @@
   <clickonTransparency>false</clickonTransparency>
 </clickon>
 
+<background>
+    <backgroundFile>images/menubg.png</backgroundFile>
+    <backgroundWidth>640</backgroundWidth>
+    <backgroundHeight>580</backgroundHeight>
+    <backgroundSrcX>0</backgroundSrcX>
+    <backgroundSrcY>0</backgroundSrcY>
+</background>
+
 </MenuSpec>

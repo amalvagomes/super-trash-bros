@@ -26,6 +26,8 @@ private:
   ParseXML parser;
   SDL_Surface* surfaceOff;
   SDL_Surface* surfaceOn;
+  SDL_Surface * const backSurface;
+  Frame * const background;
   Viewport& viewport;
   std::vector<Frame> clicks;
   unsigned nextIcon;
