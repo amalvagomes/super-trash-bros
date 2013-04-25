@@ -5,7 +5,7 @@
 #include "SDL/SDL_rotozoom.h"
 
 FrameFactory::~FrameFactory() {
-  std::cout << "The FrameFactory is down sizing!" << std::endl;
+//  std::cout << "The FrameFactory is down sizing!" << std::endl;
   std::map<std::string, SDL_Surface*>::iterator itSurf = surfaces.begin();
   while ( itSurf != surfaces.end() ) {
     SDL_FreeSurface( itSurf->second );
