@@ -97,22 +97,6 @@
   <boardwalkScale>0.95</boardwalkScale>
 </boardwalk>
 
-
-
-<shell>
-  <shellFile>images/shell.png</shellFile>
-  <shellSrcX>0</shellSrcX>
-  <shellSrcY>0</shellSrcY>
-  <shellWidth>51</shellWidth>
-  <shellHeight>51</shellHeight>
-  <shellScaleMin>0.1</shellScaleMin>
-  <shellScaleMax>1.2</shellScaleMax>
-  <shellLoc shellX="320" shellY="240"/>
-  <shellSpeed shellSpeedX="250" shellSpeedY="250"/>
-  <shellTransparency>true</shellTransparency>
-  <shellCount>10</shellCount>
-</shell>
-
 <itemCount>5</itemCount>
 <itemInterval>10</itemInterval>
 <pokeball>
@@ -131,8 +115,8 @@
 </pokeball>
 
 <mario>
-  <marioLoc marioX="120" marioY="400"/>
-  <marioSpeedX>300</marioSpeedX>
+  <marioLoc marioX="10" marioY="400"/>
+  <marioSpeedX>200</marioSpeedX>
   <marioSpeedY>200</marioSpeedY>
   <marioFrameInterval>12</marioFrameInterval>
   <marioFile>images/mario_run.png</marioFile>
@@ -157,60 +141,35 @@
   <marioJumpVelocity>300</marioJumpVelocity>
 </mario>
 
-<yoshi>
-  <yoshiLoc yoshiX="320" yoshiY="400"/>
-  <yoshiSpeedX>300</yoshiSpeedX>
-  <yoshiSpeedY>200</yoshiSpeedY>
-  <yoshiFrameInterval>8</yoshiFrameInterval>
-  <yoshiFile>images/luigi_nitin.png</yoshiFile>
-  <yoshiFrames>8</yoshiFrames>
-  <yoshiSrcX>0</yoshiSrcX>
-  <yoshiSrcY>0</yoshiSrcY>
-  <yoshiWidth>38</yoshiWidth>
-  <yoshiHeight>85</yoshiHeight>
-  <yoshiScaleMin>1.0</yoshiScaleMin>
-  <yoshiScaleMax>1.0</yoshiScaleMax>
-  <yoshiTransparency>true</yoshiTransparency>
-  <yoshiLeftFrameInterval>8</yoshiLeftFrameInterval>
-  <yoshiLeftFile>images/luigi_nitin.png</yoshiLeftFile>
-  <yoshiLeftFrames>8</yoshiLeftFrames>
-  <yoshiLeftSrcX>5</yoshiLeftSrcX>
-  <yoshiLeftSrcY>86</yoshiLeftSrcY>
-  <yoshiLeftWidth>38</yoshiLeftWidth>
-  <yoshiLeftHeight>85</yoshiLeftHeight>
-  <yoshiLeftScaleMin>1.0</yoshiLeftScaleMin>
-  <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>
-  <yoshiLeftTransparency>false</yoshiLeftTransparency>
-  <yoshiMinY>380</yoshiMinY>
-  <yoshiJumpVelocity>200</yoshiJumpVelocity>
-</yoshi>
+<luigi>
+  <luigiLoc luigiX="320" luigiY="400"/>
+  <luigiSpeedX>200</luigiSpeedX>
+  <luigiSpeedY>200</luigiSpeedY>
+  <luigiFrameInterval>8</luigiFrameInterval>
+  <luigiFile>images/luigi_nitin.png</luigiFile>
+  <luigiFrames>8</luigiFrames>
+  <luigiSrcX>0</luigiSrcX>
+  <luigiSrcY>0</luigiSrcY>
+  <luigiWidth>38</luigiWidth>
+  <luigiHeight>85</luigiHeight>
+  <luigiScaleMin>1.0</luigiScaleMin>
+  <luigiScaleMax>1.0</luigiScaleMax>
+  <luigiTransparency>true</luigiTransparency>
+  <luigiLeftFrameInterval>8</luigiLeftFrameInterval>
+  <luigiLeftFile>images/luigi_nitin.png</luigiLeftFile>
+  <luigiLeftFrames>8</luigiLeftFrames>
+  <luigiLeftSrcX>5</luigiLeftSrcX>
+  <luigiLeftSrcY>86</luigiLeftSrcY>
+  <luigiLeftWidth>38</luigiLeftWidth>
+  <luigiLeftHeight>85</luigiLeftHeight>
+  <luigiLeftScaleMin>1.0</luigiLeftScaleMin>
+  <luigiLeftScaleMax>1.0</luigiLeftScaleMax>
+  <luigiLeftTransparency>false</luigiLeftTransparency>
+  <luigiMinY>380</luigiMinY>
+  <luigiJumpVelocity>200</luigiJumpVelocity>
+</luigi>
 
-<yoshi>
-  <yoshiLoc yoshiX="120" yoshiY="400"/>
-  <yoshiSpeedX>300</yoshiSpeedX>
-  <yoshiSpeedY>200</yoshiSpeedY>
-  <yoshiFrameInterval>12</yoshiFrameInterval>
-  <yoshiFile>images/yoshi_run.png</yoshiFile>
-  <yoshiFrames>9</yoshiFrames>
-  <yoshiSrcX>0</yoshiSrcX>
-  <yoshiSrcY>89</yoshiSrcY>
-  <yoshiWidth>98</yoshiWidth>
-  <yoshiHeight>89</yoshiHeight>
-  <yoshiScaleMin>1.0</yoshiScaleMin>
-  <yoshiScaleMax>1.0</yoshiScaleMax>
-  <yoshiTransparency>true</yoshiTransparency>
-  <yoshiLeftFile>images/yoshi_run.png</yoshiLeftFile>
-  <yoshiLeftFrames>9</yoshiLeftFrames>
-  <yoshiLeftSrcX>0</yoshiLeftSrcX>
-  <yoshiLeftSrcY>89</yoshiLeftSrcY>
-  <yoshiLeftWidth>98</yoshiLeftWidth>
-  <yoshiLeftHeight>88</yoshiLeftHeight>
-  <yoshiLeftScaleMin>1.0</yoshiLeftScaleMin>
-  <yoshiLeftScaleMax>1.0</yoshiLeftScaleMax>
-  <yoshiLeftTransparency>false</yoshiLeftTransparency>
-  <yoshiMinY>380</yoshiMinY>
-  <yoshiJumpVelocity>200</yoshiJumpVelocity>
-</yoshi>
+
 
 <pokemon>
   <pokemonFile>images/charFire.png</pokemonFile>
