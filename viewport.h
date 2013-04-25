@@ -6,7 +6,7 @@
 class Viewport {
 public:
   static Viewport& getInstance();
-  ~Viewport() { std::cout << "Blocking the view ..." << std::endl; }
+  ~Viewport() { /* std::cout << "Blocking the view ..." << std::endl; */ }
   void draw() const;
   void update();
 

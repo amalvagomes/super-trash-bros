@@ -3,7 +3,7 @@
 using std::string;
 
 SDLSound::~SDLSound() {
-  std::cout << "Cleaning up sounds ..." << std::endl;
+//  std::cout << "Cleaning up sounds ..." << std::endl;
   std::clock_t start = std::clock();
   Mix_HaltMusic();
   Mix_FreeMusic(music);
@@ -12,7 +12,7 @@ SDLSound::~SDLSound() {
   }
   Mix_CloseAudio();
   std::clock_t duration = std::clock() - start;
-  std::cout << "Clean up took " << duration << " ticks\n";
+//  std::cout << "Clean up took " << duration << " ticks\n";
 }
 
 SDLSound::SDLSound() : 

@@ -58,7 +58,7 @@ void MenuManager::getNumberOfItems() {
       strm.clear(); // clear error flags
       strm.str(std::string()); // clear contents
       strm << "Okay -- you'll see " << numberOfOrbs << " pokeballs";
-      cout << strm.str() << endl;
+//      cout << strm.str() << endl;
       io.printMessageAt(strm.str(), 20, 160);
       SDL_Flip(screen);
       SDL_Delay(1000);
@@ -99,7 +99,7 @@ void MenuManager::play() {
             if ( menu.getIconClicked() == "Start Game") {
               // Here is where we call the play() function in Manager:
               manager.play();
-              std::cout << "Starting game ..." << std::endl;
+//              std::cout << "Starting game ..." << std::endl;
             }
             if ( menu.getIconClicked() == "Parameters" ) {
               getNumberOfItems();

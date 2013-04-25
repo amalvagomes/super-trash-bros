@@ -130,7 +130,7 @@ void Manager::makeItems() {
   FrameFactory& frameFact = FrameFactory::getInstance();
   for(unsigned i = 0; i < (unsigned)gdata->getXmlInt("itemCount"); i++) {
     float scale;
-    std::cout << "Adding pokeball" << std::endl;
+//    std::cout << "Adding pokeball" << std::endl;
     std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
     sprites.push_back( new Item("pokeball", frames, 0.97));
   }
@@ -145,20 +145,23 @@ void Manager::makeNewItem(){
 
 void Manager::setNumberOfItems(int number) {
   FrameFactory& frameFact = FrameFactory::getInstance();
-  int numberOfPokeballs=gdata->getXmlInt("itemCount");
+//  int numberOfPokeballs=gdata->getXmlInt("itemCount");
+  int numberOfPokeballs=sprites.size();
   if ( number > numberOfPokeballs ) {
     number = number - numberOfPokeballs;
     for (int i = 0; i < number; ++i) {
 	float scale;
-    	std::cout << "Adding pokeball" << std::endl;
+//    	std::cout << "Adding pokeball" << std::endl;
+//	std::cout << "Sprite Size: " <<sprites.size()<<std::endl;
    	std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
-    	sprites.push_back( new Item("pokeball", frames, scale));
+    	sprites.push_back( new Item("pokeball", frames, 0.97));
     }
   }
   else {
     number = numberOfPokeballs - number;
     for (int i = 0; i < number; ++i) {
       delete sprites.back();
+//      std::cout << "Deleting pokeball" << std::endl;
       sprites.pop_back();
     }
   }
