@@ -275,26 +275,30 @@ void Manager::draw() const {
   if(!foreWorldDrawn) {
       foreWorld.draw();
   }
-  if(player.getSprite()->X() < 0){
-	const_cast<Sprite&>(indicatorLeft).X(0.0);
-	const_cast<Sprite&>(indicatorLeft).Y(player.getWorldHeight() + player.getSprite()->X());
+  if(player.getSprite()->X() < viewport.X()){
+	const_cast<Sprite&>(indicatorLeft).X(viewport.X());
+	const_cast<Sprite&>(indicatorLeft).Y(player.getWorldHeight()-
+		((viewport.X()-player.getSprite()->X())*0.5));
 	indicatorLeft.draw();
   }
-  if(player.getSprite()->X() > player.getWorldWidth()){
-	const_cast<Sprite&>(indicator).X(player.getWorldWidth()-indicator.getFrameWidth());
+  if(player.getSprite()->X() > (viewport.X() + viewport.getViewWidth())){
+	const_cast<Sprite&>(indicator).X((viewport.X() + viewport.getViewWidth())-
+		indicator.getFrameWidth());
 	const_cast<Sprite&>(indicator).Y(player.getWorldHeight() -
-		abs(player.getSprite()->X()-player.getWorldWidth()));
+		(abs((viewport.X() + viewport.getViewWidth())-player.getSprite()->X())*0.5));
 	indicator.draw();
   }
-  if(player2.getSprite()->X() < 0){
-	const_cast<Sprite&>(indicator2Left).X(0.0);
-	const_cast<Sprite&>(indicator2Left).Y(player2.getWorldHeight() + player2.getSprite()->X());
+  if(player2.getSprite()->X() < viewport.X()){
+	const_cast<Sprite&>(indicator2Left).X(viewport.X());
+	const_cast<Sprite&>(indicator2Left).Y(player2.getWorldHeight() -
+		((viewport.X() - player2.getSprite()->X())*0.5));
 	indicator2Left.draw();
   }
-  if(player2.getSprite()->X() > player2.getWorldWidth()){
-	const_cast<Sprite&>(indicator2).X(player2.getWorldWidth()-indicator2.getFrameWidth());
+  if(player2.getSprite()->X() > (viewport.X() + viewport.getViewWidth())){
+	const_cast<Sprite&>(indicator2).X((viewport.X() + viewport.getViewWidth())-
+		indicator2.getFrameWidth());
 	const_cast<Sprite&>(indicator2).Y(player2.getWorldHeight() -
-		abs(player2.getSprite()->X()-player2.getWorldWidth()));
+		(abs((viewport.X() + viewport.getViewWidth())-player2.getSprite()->X())*0.5));
 	indicator2.draw();
   }
   if(!playerDrawn) {
