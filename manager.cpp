@@ -87,7 +87,7 @@ Manager::Manager() :
   pokemonSurface( io.loadAndSet(gdata->getXmlStr("pokemonFile"),
 		gdata->getXmlBool("pokemonTransparency")) ),
   player(std::string("mario")),
-  player2(std::string("yoshi"), player, 120.0),
+  player2(std::string("luigi"), player, 120.0),
   playerPickup(false),
   player2Pickup(false),
   currentStar(0),
@@ -303,7 +303,7 @@ void Manager::play() {
                 item->toggleMovement();
                 item->toggleAnimation();
                 player2.setItem(NULL);
-                item->velocityY(-350.0);
+//                item->velocityY(-350.0);
                 float veloc = player2.getSprite()->velocityX();
                 veloc += (veloc/abs(veloc))*300.0;
                 item->velocityX(veloc);
@@ -326,7 +326,7 @@ void Manager::play() {
                 item->toggleMovement();
                 item->toggleAnimation();
                 player.setItem(NULL);
-                item->velocityY(player.getSprite()->velocityY()-25.0);
+  //              item->velocityY(player.getSprite()->velocityY()-25.0);
                 float veloc = player.getSprite()->velocityX();
                 veloc += (veloc/abs(veloc))*200.0;
                 item->velocityX(veloc);
