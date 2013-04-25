@@ -21,4 +21,5 @@ private:
   MenuManager(const MenuManager&);
   MenuManager& operator=(const MenuManager&);
   void getNumberOfItems();
+  void displayHelp();
 };

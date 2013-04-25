@@ -4,14 +4,14 @@ using std::string;
 
 SDLSound::~SDLSound() {
 //  std::cout << "Cleaning up sounds ..." << std::endl;
-  std::clock_t start = std::clock();
+//  std::clock_t start = std::clock();
   Mix_HaltMusic();
   Mix_FreeMusic(music);
   for (unsigned int i = 0; i < sounds.size(); ++i) {
     Mix_FreeChunk(sounds[i]);
   }
   Mix_CloseAudio();
-  std::clock_t duration = std::clock() - start;
+//  std::clock_t duration = std::clock() - start;
 //  std::cout << "Clean up took " << duration << " ticks\n";
 }
 
