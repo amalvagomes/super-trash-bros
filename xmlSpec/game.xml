@@ -188,4 +188,7 @@
   <pokemonTransparency>false</pokemonTransparency>
 </pokemon>
 
+<p1LifeThreshold>150.0</p1LifeThreshold>
+<p2LifeThreshold>150.0</p2LifeThreshold>
+
 </GameData>

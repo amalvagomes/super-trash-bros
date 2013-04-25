@@ -54,6 +54,7 @@ private:
   SmartPlayer player2;
   bool playerPickup;
   bool player2Pickup;
+  int playerVictory;
 
   int currentStar;
   int itemTimer;

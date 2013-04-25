@@ -90,6 +90,7 @@ Manager::Manager() :
   player2(std::string("luigi"), player, 120.0),
   playerPickup(false),
   player2Pickup(false),
+  playerVictory(0),
   currentStar(0),
   itemTimer(gdata->getXmlInt("itemInterval")),
   itemTime(0),
@@ -237,14 +238,35 @@ void Manager::draw() const {
   io.printMessageAt("Mario:",70,380);
   io.printDamage(player2.getDamage(),520,400);
   io.printMessageAt("Luigi:",520,380);
+  if(playerVictory!=0) {
+    SDL_Rect bg = SDL_Rect();
+    bg.x = 0;
+    bg.y = 0;
+    bg.w = 640;
+    bg.h = 580;
+    SDL_FillRect(io.getScreen(), &bg, SDL_MapRGBA(io.getScreen()->format,0,0,0,200));
+    io.printMessageCenteredAt("GAME OVER",250);
+    switch(playerVictory) {
+      case 1:
+        io.printMessageCenteredAt("Player 1 Wins!",290);
+        break;
+      case 2:
+        io.printMessageCenteredAt("Player 2 Wins!",290);
+        break;
+      default:
+        io.printMessageCenteredAt("WHHUUUTTT??  Looks like you've tied... somehow...",290);
+    }
+  }
 }
 
 void Manager::play() {
   clock.unpause();
   SDL_Event* event = new SDL_Event();
   SDLSound sound;
+  playerVictory = 0;
   bool done = false;
   bool keyCatch = false;
+  int gameOverTimer = 5000;
   while ( ! done ) {
     draw();
     SDL_Flip(screen);
@@ -473,6 +495,20 @@ void Manager::play() {
         float veloc = player2.getSprite()->velocityX();
         const_cast<Drawable*>(player.getSprite())->velocityX(veloc+(veloc*(player.getDamage()/75.0)));
       }
+    }
+    if(player.getDamage() > gdata->getXmlFloat("p1LifeThreshold")) {
+        if(gameOverTimer<0) {
+          done = true;
+        }
+        gameOverTimer -= ticks;
+        playerVictory = 2;
+    }
+    if(player2.getDamage() > gdata->getXmlFloat("p2LifeThreshold")) {
+        if(gameOverTimer<0) {
+          done = true;
+        }
+        gameOverTimer -= ticks;
+        playerVictory = 1;
     }
     backWorld.update();
     midWorld.update();
