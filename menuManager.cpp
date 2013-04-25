@@ -1,5 +1,6 @@
 #include <cmath>
 #include <sstream>
+#include "sound.h"
 #include "menuManager.h"
 #include "manager.h"
 
@@ -7,6 +8,7 @@ MenuManager::MenuManager() :
   env( SDL_putenv(const_cast<char*>("SDL_VIDEO_CENTERED=center")) ),
   screen( IOManager::getInstance().getScreen() ),
   clock( Clock::getInstance() ),
+  io( IOManager::getInstance() ),
   backColor(),
   menu(),
   numberOfOrbs(0)
@@ -25,7 +27,7 @@ void MenuManager::drawBackground() const {
 }
 
 void MenuManager::getNumberOfItems() {
-  IOManager& io = IOManager::getInstance().getInstance();
+//  IOManager& io = IOManager::getInstance().getInstance();
   SDL_Event* event = new SDL_Event();
   bool done = false;
   bool nameDone = false;
@@ -68,7 +70,7 @@ void MenuManager::getNumberOfItems() {
 }
 
 void MenuManager::displayHelp() {
-  IOManager& io = IOManager::getInstance().getInstance();
+//  IOManager& io = IOManager::getInstance().getInstance();
   SDL_Event* event = new SDL_Event();
   bool done = false;
 //  bool nameDone = false;
@@ -116,6 +118,8 @@ void MenuManager::displayHelp() {
 void MenuManager::play() {
   bool keyCatch = false; // To get only 1 key per keydown
   SDL_Event* event = new SDL_Event();
+  SDLSound sound;
+  sound.toggleMusic();
   bool done = false;
   // Here, we need to create an instance of the Manager,
   // the one that manages the game:
@@ -168,16 +172,22 @@ void MenuManager::play() {
         case SDLK_DOWN   : {
           if ( !keyCatch ) {
             menu.increment();
+            io.clearString();
+            io.buildString(event);
+            sound[1];
           }
           break;
         }
         case SDLK_UP   : {
           if ( !keyCatch ) {
             menu.decrement();
+            io.clearString();
+            io.buildString(event);
+            sound[1];
           }
           break;
         }
-        default          : break;
+        default          :  break;
       }
       keyCatch = true;
     }

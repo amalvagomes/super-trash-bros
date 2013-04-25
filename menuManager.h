@@ -12,7 +12,7 @@ private:
   bool env;
   SDL_Surface *screen;
   const Clock& clock;
-
+  IOManager& io;
   SDL_Color backColor;
   Menu menu;
   int numberOfOrbs;

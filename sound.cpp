@@ -35,8 +35,9 @@ SDLSound::SDLSound() :
   if (!music) throw string("Couldn't load Game Sound")+Mix_GetError();
 
   startMusic();
-  sounds.reserve(1);
+  sounds.reserve(2);
   sounds.push_back( Mix_LoadWAV("sound/smack-1.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/button-15.wav") );
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
 }
 
