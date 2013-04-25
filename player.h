@@ -16,6 +16,8 @@ public:
   const Drawable* getSprite() const { return sprite; }
   float getDamage() const { return damage; }
   void damageIncr(float amount = 1.0) { damage += amount; }
+  int getWorldHeight() const { return worldHeight; }
+  int getWorldWidth() const { return worldWidth; }
 
   bool hasItem() const { return item!=NULL; }
   void setItem(Item* it) { item=it; }

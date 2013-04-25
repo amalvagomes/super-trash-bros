@@ -17,18 +17,18 @@ Sprite::Sprite(const std::string& name, const Frame* fm, const float sc) :
            ),
            sc
   ), 
-  frame(fm),
   frameWidth(fm->getWidth()),
   frameHeight(fm->getHeight()),
+  frame(fm),
   worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
   worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight"))
 { }
 
 Sprite::Sprite(const Sprite& s) :
   Drawable(s.getName(), s.getPosition(), s.getVelocity(), s.getScale()), 
-  frame(s.frame),
   frameWidth(s.getFrame()->getWidth()),
   frameHeight(s.getFrame()->getHeight()),
+  frame(s.frame),
   worldWidth(Gamedata::getInstance()->getXmlInt("worldWidth")),
   worldHeight(Gamedata::getInstance()->getXmlInt("worldHeight"))
 { }
@@ -37,9 +37,9 @@ Sprite& Sprite::operator=(const Sprite& rhs) {
   setName( rhs.getName() );
   setPosition(rhs.getPosition());
   setVelocity(rhs.getVelocity());
-  frame = rhs.frame;
   frameWidth = rhs.frameWidth;
   frameHeight = rhs.frameHeight;
+  frame = rhs.frame;
   worldWidth = Gamedata::getInstance()->getXmlInt("worldWidth");
   worldHeight = Gamedata::getInstance()->getXmlInt("worldHeight");
   return *this;

@@ -97,6 +97,34 @@
   <boardwalkScale>0.95</boardwalkScale>
 </boardwalk>
 
+<indicator>
+  <indicatorFile>images/indicator.png</indicatorFile>
+  <indicatorSrcX>0</indicatorSrcX>
+  <indicatorSrcY>0</indicatorSrcY>
+  <indicatorWidth>30</indicatorWidth>
+  <indicatorHeight>22</indicatorHeight>
+  <indicatorScaleMin>1.0</indicatorScaleMin>
+  <indicatorScaleMax>1.0</indicatorScaleMax>
+  <indicatorLoc indicatorX="320" indicatorY="240"/>
+  <indicatorSpeed indicatorSpeedX="0" indicatorSpeedY="0"/>
+  <indicatorTransparency>false</indicatorTransparency>
+  <indicatorCount>1</indicatorCount>
+</indicator>
+
+<indicatorLeft>
+  <indicatorLeftFile>images/indicatorLeft.png</indicatorLeftFile>
+  <indicatorLeftSrcX>0</indicatorLeftSrcX>
+  <indicatorLeftSrcY>0</indicatorLeftSrcY>
+  <indicatorLeftWidth>30</indicatorLeftWidth>
+  <indicatorLeftHeight>22</indicatorLeftHeight>
+  <indicatorLeftScaleMin>1.0</indicatorLeftScaleMin>
+  <indicatorLeftScaleMax>1.0</indicatorLeftScaleMax>
+  <indicatorLeftLoc indicatorLeftX="320" indicatorLeftY="240"/>
+  <indicatorLeftSpeed indicatorLeftSpeedX="0" indicatorLeftSpeedY="0"/>
+  <indicatorLeftTransparency>false</indicatorLeftTransparency>
+  <indicatorLeftCount>1</indicatorLeftCount>
+</indicatorLeft>
+
 <itemCount>5</itemCount>
 <itemInterval>10</itemInterval>
 <pokeball>

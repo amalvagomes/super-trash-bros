@@ -52,6 +52,12 @@ private:
 
   Player player;
   SmartPlayer player2;
+  SDL_Surface * const indicatorSurface;
+  Frame * const indicatorFrame;
+  Sprite indicator;
+  SDL_Surface * const indicatorLeftSurface;
+  Frame * const indicatorLeftFrame;
+  Sprite indicatorLeft;
   bool playerPickup;
   bool player2Pickup;
   int playerVictory;

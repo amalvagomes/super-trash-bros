@@ -29,6 +29,10 @@ for (unsigned i = 0; i < pokemonFrames.size(); ++i) {
   delete foreFrame;
   SDL_FreeSurface(backSurface);
   delete backFrame;
+  SDL_FreeSurface(indicatorSurface);
+  delete indicatorFrame;
+  SDL_FreeSurface(indicatorLeftSurface);
+  delete indicatorLeftFrame;
   delete Gamedata::getInstance();
 }
 
@@ -88,6 +92,24 @@ Manager::Manager() :
 		gdata->getXmlBool("pokemonTransparency")) ),
   player(std::string("mario")),
   player2(std::string("luigi"), player, 120.0),
+  indicatorSurface( io.loadAndSet(gdata->getXmlStr("indicatorFile"), 
+                gdata->getXmlBool("indicatorTransparency")) ),
+  indicatorFrame(new Frame(indicatorSurface,
+                gdata->getXmlInt("indicatorWidth"), 
+                gdata->getXmlInt("indicatorHeight"), 
+                gdata->getXmlInt("indicatorSrcX"), 
+                gdata->getXmlInt("indicatorSrcY")) 
+  ),
+  indicator("indicator",indicatorFrame, 1.0 ),
+  indicatorLeftSurface( io.loadAndSet(gdata->getXmlStr("indicatorLeftFile"), 
+                gdata->getXmlBool("indicatorLeftTransparency")) ),
+  indicatorLeftFrame(new Frame(indicatorLeftSurface,
+                gdata->getXmlInt("indicatorLeftWidth"), 
+                gdata->getXmlInt("indicatorLeftHeight"), 
+                gdata->getXmlInt("indicatorLeftSrcX"), 
+                gdata->getXmlInt("indicatorLeftSrcY")) 
+  ),
+  indicatorLeft("indicatorLeft",indicatorLeftFrame, 1.0 ),
   playerPickup(false),
   player2Pickup(false),
   playerVictory(0),
@@ -224,6 +246,17 @@ void Manager::draw() const {
   }
   if(!foreWorldDrawn) {
       foreWorld.draw();
+  }
+  if(player.getSprite()->X() < 0){
+	const_cast<Sprite&>(indicatorLeft).X(0.0);
+	const_cast<Sprite&>(indicatorLeft).Y(player.getWorldHeight() + player.getSprite()->X());
+	indicatorLeft.draw();
+  }
+  if(player.getSprite()->X() > player.getWorldWidth()){
+	const_cast<Sprite&>(indicator).X(player.getWorldWidth()-indicator.getFrameWidth());
+	const_cast<Sprite&>(indicator).Y(player.getWorldHeight() -
+		abs(player.getSprite()->X()-player.getWorldWidth()));
+	indicator.draw();
   }
   if(!playerDrawn) {
       player.draw();

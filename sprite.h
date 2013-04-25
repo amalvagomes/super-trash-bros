@@ -18,15 +18,18 @@ public:
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   unsigned getPixel(Uint32, Uint32) const;
+  int getFrameWidth() const { return frameWidth; }
 
   Vector2f getCenter() const { 
     return Vector2f( X()+frame->getWidth()/2, Y()+frame->getHeight()/2 );
   }
 
-private:
-  const Frame * frame;
+protected:
   int frameWidth;
   int frameHeight;
+
+private:
+  const Frame * frame;
   int worldWidth;
   int worldHeight;
   int getDistance(const Sprite*) const;
