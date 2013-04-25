@@ -11,7 +11,8 @@ MenuManager::MenuManager() :
   io( IOManager::getInstance() ),
   backColor(),
   menu(),
-  numberOfOrbs(0)
+  numberOfOrbs(0),
+  soundEnabled(true)
 { 
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     throw string("Unable to initialize SDL: ");
@@ -59,6 +60,53 @@ void MenuManager::getNumberOfItems() {
       strm << "Okay -- you'll see " << numberOfOrbs << " pokeballs";
 //      cout << strm.str() << endl;
       io.printMessageAt(strm.str(), 20, 160);
+      SDL_Flip(screen);
+      SDL_Delay(1000);
+      done = true;
+    }
+    if ( !done ) {
+      SDL_Flip(screen);
+    }
+  }
+}
+
+void MenuManager::getSoundOptions() {
+//  IOManager& io = IOManager::getInstance().getInstance();
+  SDL_Event* event = new SDL_Event();
+  bool done = false;
+  bool nameDone = false;
+  const string msg("Sound? (on/off) ");
+  io.clearString();
+  while ( not done ) {
+    Uint8 *keystate = SDL_GetKeyState(NULL);
+    if ( SDL_PollEvent(event) )
+    switch (event->type) {
+      case SDL_KEYDOWN: {
+        if (keystate[SDLK_ESCAPE] || keystate[SDLK_q]) {
+          done = true;
+        }
+        if (keystate[SDLK_RETURN]) {
+          nameDone = true;
+        }
+        io.buildString(event);
+      }
+    }
+    drawBackground();
+    io.printStringAfterMessage(msg, 20, 220);
+    if ( nameDone ) {
+      std::string answer = io.getString();
+      std::stringstream strm;
+      if(answer=="on") {
+        strm << "Okay -- you'll hear music!";
+        soundEnabled = true;
+      } else if(answer=="off") {
+        strm << "Okay -- we'll keep things quiet...";
+        soundEnabled = false;
+      } else {
+        strm << "That response doesn't look like an 'on' or 'off'...";
+        soundEnabled = true;
+      }
+      io.printMessageAt(strm.str(), 20, 260);
       SDL_Flip(screen);
       SDL_Delay(1000);
       done = true;
@@ -151,8 +199,9 @@ void MenuManager::play() {
             }
             if ( menu.getIconClicked() == "Parameters" ) {
               getNumberOfItems();
-              // After we get the parameter, we must pass it to Manager:
               manager.setNumberOfItems( numberOfOrbs );
+              getSoundOptions();
+              manager.setSoundEnabled( soundEnabled );
             }
             if ( menu.getIconClicked() == "Help" ) {
               // Here is where we explain how to play the game"
@@ -174,7 +223,7 @@ void MenuManager::play() {
             menu.increment();
             io.clearString();
             io.buildString(event);
-            sound[1];
+            if(soundEnabled) sound[1];
           }
           break;
         }
@@ -183,7 +232,7 @@ void MenuManager::play() {
             menu.decrement();
             io.clearString();
             io.buildString(event);
-            sound[1];
+            if(soundEnabled) sound[1];
           }
           break;
         }

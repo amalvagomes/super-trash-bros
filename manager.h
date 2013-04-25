@@ -21,6 +21,7 @@ public:
   ~Manager ();
   void play();
   void setNumberOfItems(int);
+  void setSoundEnabled(bool);
 
 private:
   const bool env;
@@ -77,6 +78,7 @@ private:
   std::vector<Frame*> pokemonFrames;
   const unsigned int TICK_INTERVAL;
   Uint32 nextTime;
+  bool soundEnabled;
 
   void draw() const;
   Uint32 timeLeft();

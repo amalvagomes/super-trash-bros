@@ -143,7 +143,8 @@ Manager::Manager() :
   sprites(),
   pokemonFrames(),
   TICK_INTERVAL( gdata->getXmlInt("tickInterval") ),
-  nextTime(clock.getTicks()+TICK_INTERVAL)
+  nextTime(clock.getTicks()+TICK_INTERVAL),
+  soundEnabled(true)
 {
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
     throw string("Unable to initialize SDL: ");
@@ -187,6 +188,10 @@ void Manager::makeNewItem(){
     float scale;
     std::vector<Frame*> frames = frameFact.getFrameVector("pokeball", &scale);
     sprites.push_back(new Item("pokeball", frames, 0.97));
+}
+
+void Manager::setSoundEnabled(bool p) {
+    soundEnabled = p;
 }
 
 void Manager::setNumberOfItems(int number) {
@@ -330,6 +335,7 @@ void Manager::play() {
   clock.unpause();
   SDL_Event* event = new SDL_Event();
   SDLSound sound;
+  if(!soundEnabled) sound.toggleMusic();
   playerVictory = 0;
   bool done = false;
   bool keyCatch = false;
@@ -401,7 +407,7 @@ void Manager::play() {
             } else {
                 player2Pickup = true;
             }
-            sound[0];
+            if(soundEnabled) sound[0];
           }
 	  break;
 	}
@@ -424,7 +430,7 @@ void Manager::play() {
             } else {
                 playerPickup = true;
             }
-            sound[0];
+            if(soundEnabled) sound[0];
           }
 	  break;
 	}
@@ -483,7 +489,7 @@ void Manager::play() {
       if(item != 0) {
         if(!item->isReleased()) { 
           if(++itemTime == itemTimer) {
-            item->X((int)getRand(0.0,640.0));
+            item->X((int)getRand(0.0,static_cast<float>(gdata->getXmlInt("worldWidth"))));
             item->Y(0);
             item->fall();
             itemTime = 0;

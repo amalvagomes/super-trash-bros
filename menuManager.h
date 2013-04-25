@@ -16,10 +16,12 @@ private:
   SDL_Color backColor;
   Menu menu;
   int numberOfOrbs;
+  bool soundEnabled;
 
   void drawBackground() const;
   MenuManager(const MenuManager&);
   MenuManager& operator=(const MenuManager&);
   void getNumberOfItems();
+  void getSoundOptions();
   void displayHelp();
 };
