@@ -9,6 +9,7 @@ class Menu {
 public:
   Menu();
   ~Menu();
+  void drawBG() const;
   void draw() const;
   void lightOn() { click = 1; }
   void lightOff() { click = 0; }

@@ -21,10 +21,7 @@ MenuManager::MenuManager() :
 }
 
 void MenuManager::drawBackground() const {
-  SDL_FillRect( screen, NULL, 
-    SDL_MapRGB(screen->format, backColor.r, backColor.g, backColor.b) );
-  SDL_Rect dest = {0, 0, 0, 0};
-  SDL_BlitSurface( screen, NULL, screen, &dest );
+    menu.drawBG();
 }
 
 void MenuManager::getNumberOfItems() {
