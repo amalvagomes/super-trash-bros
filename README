@@ -5,8 +5,11 @@ Project #5
 
 Accomplished:
  * Added menu system to allow changing of parameters (number of pokeballs), help, etc.
+   - Number of Pokeballs
+   - Sound on/off
  * Added sound when toggling through the menu buttons. 
  * Added damaging pokeballs that transform into Charzard upon impact after thrown at players.
+   - Added knockback and damage to each individual pokeball
  * Added AI to the second player (Luigi) . When within a certain distance, it will attack and keep following for some time.
  * Added jump feature for the players and removed up and down movement.
  * Added a conclusion so that either of the players win. The user can then start a new game or quit.
@@ -16,6 +19,13 @@ Accomplished:
 Extras:
  * AI player can be over ridden by using w,a,d,e,q which are the controls for the second player. (Total 2 players).
  * If a player goes outside the viewport, indicators show where the player is based on distance to the viewport. In other words, the indicators help to see how far the players have gone in the world. 
+ * Our lovely faces on the menu screen -- free of charge!
+ * The menu can be used with not only the return key, but the right arrow key as well
+ * Added a "Bowser" sprite sheet (He's green, which seems to line up with our theory about your per-pixel collision detection...)
+   - This can be found in the images directory, though it is not currently a default character in the game
+ * Fixed your menu rendering bug (relation to the viewport X,Y)
+ * All code is hosted on GitHub and all work was done using git as our collaboration tool
+   - https://github.com/amalvagomes/super-trash-bros
 
 Did Not Accomplish:
 According to the Tao Teh Ching:
@@ -27,6 +37,17 @@ According to the Tao Teh Ching:
 The things we did not accomplish are the beginning of heaven and earth.
 
 XML Schema Change Log:
+game.xml
+  - p1LifeThreshold - Adjusts death point in terms of percentages.
+  - p2LifeThreshold - Yeah, what he said.
+
+menu.xml
+  - backgroundFile
+  - backgroundSrcX
+  - backgroundSrcY
+  - backgroundWidth
+  - backgroundHeight
+  The above additions do exactly what you think they would.
 
 Special Thanks:
 Tyler Cook - background music from "Robopop" off his album "Electrock Retrospective, Volume 1: Dance Party"
