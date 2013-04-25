@@ -70,6 +70,52 @@ void MenuManager::getNumberOfItems() {
   }
 }
 
+void MenuManager::displayHelp() {
+  IOManager& io = IOManager::getInstance().getInstance();
+  SDL_Event* event = new SDL_Event();
+  bool done = false;
+//  bool nameDone = false;
+  const string msg("----------------------- HELP MENU -----------------------");
+  io.clearString();
+  while ( not done ) {
+    Uint8 *keystate = SDL_GetKeyState(NULL);
+    if ( SDL_PollEvent(event) )
+    switch (event->type) {
+      case SDL_KEYDOWN: {
+        if (keystate[SDLK_ESCAPE] || keystate[SDLK_q]) {
+          done = true;
+        }
+        io.buildString(event);
+      }
+    }
+    drawBackground();
+//    io.printStringAfterMessage(msg, 20, 120);
+      io.printMessageCenteredAt(msg, 50);
+    
+      io.printMessageCenteredAt("Press p to pause game", 90);
+      io.printMessageCenteredAt("Press ESC to return to menu", 110);
+      io.printMessageCenteredAt("Press F1 to see in game help", 130);
+
+      io.printMessageAt("MARIO CONTROLS", 375, 180);
+      io.printMessageAt("Left: LEFT arrow ", 375, 220);
+      io.printMessageAt("Right: RIGHT arrow", 375, 240);
+      io.printMessageAt("Jump: UP arrow ", 375, 260);
+      io.printMessageAt("Sprint: RSHIFT", 375, 280);
+      io.printMessageAt("Pick/Throw Item: /", 375, 300);
+
+      io.printMessageAt("LUIGI CONTROLS", 75, 180);
+      io.printMessageAt("Left: a ", 75, 220);
+      io.printMessageAt("Right: d", 75, 240);
+      io.printMessageAt("Jump: w ", 75, 260);
+      io.printMessageAt("Sprint: e", 75, 280);
+      io.printMessageAt("Pick/Throw Item: q", 75, 300);
+
+    if ( !done ) {
+      SDL_Flip(screen);
+    }
+  }
+}
+
 void MenuManager::play() {
   bool keyCatch = false; // To get only 1 key per keydown
   SDL_Event* event = new SDL_Event();
@@ -108,7 +154,8 @@ void MenuManager::play() {
             }
             if ( menu.getIconClicked() == "Help" ) {
               // Here is where we explain how to play the game"
-              std::cout << "Give help  ..." << std::endl;
+              //std::cout << "Give help  ..." << std::endl;
+	      displayHelp();
             }
             if ( menu.getIconClicked() == "Exit" ) {
               drawBackground();
