@@ -33,6 +33,10 @@ for (unsigned i = 0; i < pokemonFrames.size(); ++i) {
   delete indicatorFrame;
   SDL_FreeSurface(indicatorLeftSurface);
   delete indicatorLeftFrame;
+  SDL_FreeSurface(indicator2Surface);
+  delete indicator2Frame;
+  SDL_FreeSurface(indicator2LeftSurface);
+  delete indicator2LeftFrame;
   delete Gamedata::getInstance();
 }
 
@@ -110,6 +114,25 @@ Manager::Manager() :
                 gdata->getXmlInt("indicatorLeftSrcY")) 
   ),
   indicatorLeft("indicatorLeft",indicatorLeftFrame, 1.0 ),
+
+  indicator2Surface( io.loadAndSet(gdata->getXmlStr("indicator2File"), 
+                gdata->getXmlBool("indicator2Transparency")) ),
+  indicator2Frame(new Frame(indicator2Surface,
+                gdata->getXmlInt("indicator2Width"), 
+                gdata->getXmlInt("indicator2Height"), 
+                gdata->getXmlInt("indicator2SrcX"), 
+                gdata->getXmlInt("indicator2SrcY")) 
+  ),
+  indicator2("indicator2",indicator2Frame, 1.0 ),
+  indicator2LeftSurface( io.loadAndSet(gdata->getXmlStr("indicator2LeftFile"), 
+                gdata->getXmlBool("indicator2LeftTransparency")) ),
+  indicator2LeftFrame(new Frame(indicator2LeftSurface,
+                gdata->getXmlInt("indicator2LeftWidth"), 
+                gdata->getXmlInt("indicator2LeftHeight"), 
+                gdata->getXmlInt("indicator2LeftSrcX"), 
+                gdata->getXmlInt("indicator2LeftSrcY")) 
+  ),
+  indicator2Left("indicator2Left",indicator2LeftFrame, 1.0 ),
   playerPickup(false),
   player2Pickup(false),
   playerVictory(0),
@@ -257,6 +280,17 @@ void Manager::draw() const {
 	const_cast<Sprite&>(indicator).Y(player.getWorldHeight() -
 		abs(player.getSprite()->X()-player.getWorldWidth()));
 	indicator.draw();
+  }
+  if(player2.getSprite()->X() < 0){
+	const_cast<Sprite&>(indicator2Left).X(0.0);
+	const_cast<Sprite&>(indicator2Left).Y(player2.getWorldHeight() + player2.getSprite()->X());
+	indicator2Left.draw();
+  }
+  if(player2.getSprite()->X() > player2.getWorldWidth()){
+	const_cast<Sprite&>(indicator2).X(player2.getWorldWidth()-indicator2.getFrameWidth());
+	const_cast<Sprite&>(indicator2).Y(player2.getWorldHeight() -
+		abs(player2.getSprite()->X()-player2.getWorldWidth()));
+	indicator2.draw();
   }
   if(!playerDrawn) {
       player.draw();

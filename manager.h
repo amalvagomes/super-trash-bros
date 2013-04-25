@@ -58,6 +58,12 @@ private:
   SDL_Surface * const indicatorLeftSurface;
   Frame * const indicatorLeftFrame;
   Sprite indicatorLeft;
+  SDL_Surface * const indicator2Surface;
+  Frame * const indicator2Frame;
+  Sprite indicator2;
+  SDL_Surface * const indicator2LeftSurface;
+  Frame * const indicator2LeftFrame;
+  Sprite indicator2Left;
   bool playerPickup;
   bool player2Pickup;
   int playerVictory;

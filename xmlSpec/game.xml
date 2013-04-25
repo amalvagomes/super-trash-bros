@@ -125,6 +125,35 @@
   <indicatorLeftCount>1</indicatorLeftCount>
 </indicatorLeft>
 
+<indicator2>
+  <indicator2File>images/indicator2.png</indicator2File>
+  <indicator2SrcX>0</indicator2SrcX>
+  <indicator2SrcY>0</indicator2SrcY>
+  <indicator2Width>30</indicator2Width>
+  <indicator2Height>22</indicator2Height>
+  <indicator2ScaleMin>1.0</indicator2ScaleMin>
+  <indicator2ScaleMax>1.0</indicator2ScaleMax>
+  <indicator2Loc indicator2X="320" indicator2Y="240"/>
+  <indicator2Speed indicator2SpeedX="0" indicator2SpeedY="0"/>
+  <indicator2Transparency>false</indicator2Transparency>
+  <indicator2Count>1</indicator2Count>
+</indicator2>
+
+<indicator2Left>
+  <indicator2LeftFile>images/indicator2Left.png</indicator2LeftFile>
+  <indicator2LeftSrcX>0</indicator2LeftSrcX>
+  <indicator2LeftSrcY>0</indicator2LeftSrcY>
+  <indicator2LeftWidth>30</indicator2LeftWidth>
+  <indicator2LeftHeight>22</indicator2LeftHeight>
+  <indicator2LeftScaleMin>1.0</indicator2LeftScaleMin>
+  <indicator2LeftScaleMax>1.0</indicator2LeftScaleMax>
+  <indicator2LeftLoc indicator2LeftX="320" indicator2LeftY="240"/>
+  <indicator2LeftSpeed indicator2LeftSpeedX="0" indicator2LeftSpeedY="0"/>
+  <indicator2LeftTransparency>false</indicator2LeftTransparency>
+  <indicator2LeftCount>1</indicator2LeftCount>
+</indicator2Left>
+
+
 <itemCount>5</itemCount>
 <itemInterval>10</itemInterval>
 <pokeball>
