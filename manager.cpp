@@ -281,10 +281,10 @@ void Manager::draw() const {
     io.printMessageCenteredAt("GAME OVER",250);
     switch(playerVictory) {
       case 1:
-        io.printMessageCenteredAt("Player 1 Wins!",290);
+        io.printMessageCenteredAt("Mario Wins!",290);
         break;
       case 2:
-        io.printMessageCenteredAt("Player 2 Wins!",290);
+        io.printMessageCenteredAt("Luigi Wins!",290);
         break;
       default:
         io.printMessageCenteredAt("WHHUUUTTT??  Looks like you've tied... somehow...",290);
@@ -531,14 +531,20 @@ void Manager::play() {
     }
     if(player.getDamage() > gdata->getXmlFloat("p1LifeThreshold")) {
         if(gameOverTimer<0) {
+          player.setDamage(0.0);
+          player2.setDamage(0.0);
           done = true;
+          clock.pause();
         }
         gameOverTimer -= ticks;
         playerVictory = 2;
     }
     if(player2.getDamage() > gdata->getXmlFloat("p2LifeThreshold")) {
         if(gameOverTimer<0) {
+          player.setDamage(0.0);
+          player2.setDamage(0.0);
           done = true;
+          clock.pause();
         }
         gameOverTimer -= ticks;
         playerVictory = 1;

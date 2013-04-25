@@ -142,6 +142,7 @@ void MenuManager::play() {
             if ( menu.getIconClicked() == "Start Game") {
               // Here is where we call the play() function in Manager:
               manager.play();
+              menu.lightOff();
 //              std::cout << "Starting game ..." << std::endl;
             }
             if ( menu.getIconClicked() == "Parameters" ) {

@@ -14,6 +14,7 @@ public:
   virtual void update(Uint32 ticks);
   virtual void draw() const;
   const Drawable* getSprite() const { return sprite; }
+  void setDamage(float dam) { damage = dam; }
   float getDamage() const { return damage; }
   void damageIncr(float amount = 1.0) { damage += amount; }
   int getWorldHeight() const { return worldHeight; }
