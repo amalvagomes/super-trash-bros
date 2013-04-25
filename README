@@ -12,11 +12,19 @@ Accomplished:
  * Added a conclusion so that either of the players win. The user can then start a new game or quit.
  * Cleaned up the code.
  * No memory Leaks.
+
 Extras:
  * AI player can be over ridden by using w,a,d,e,q which are the controls for the second player. (Total 2 players).
  * If a player goes outside the viewport, indicators show where the player is based on distance to the viewport. In other words, the indicators help to see how far the players have gone in the world. 
 
 Did Not Accomplish:
+According to the Tao Teh Ching:
+
+    "Nonbeing is called the beginning of heaven and earth; 
+     being is called the mother of all things."
+                              - Tao Teh Ching (Cleary) 1.2
+
+The things we did not accomplish are the beginning of heaven and earth.
 
 XML Schema Change Log:
 
